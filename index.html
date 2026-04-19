@@ -385,6 +385,8 @@
     }
 
     @media print {
+      .ibis-logo-center { display: none !important; }
+
       #printCalendarGrid .day-cell.weekend,
       #printWeekdayRow .weekday.weekend {
         background: #f7eee5 !important;
@@ -439,6 +441,84 @@
       font-size: .78rem;
       font-weight: 700;
       white-space: nowrap;
+    }
+
+    .person-total.mismatch {
+      background: #f9d9d5;
+      color: #8b3d36;
+      border: 1px solid #e7a29a;
+      font-weight: 800;
+    }
+
+    .report-list {
+      display: grid;
+      gap: 10px;
+      max-height: 70vh;
+      overflow: auto;
+    }
+
+    .report-item {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+
+    .report-item.report-cancel {
+      background: linear-gradient(180deg, #fff2f1, #fddfdb);
+      border: 1px solid #eca29b;
+      border-left: 6px solid #d96b60;
+      box-shadow: 0 10px 24px rgba(181, 87, 75, 0.12);
+    }
+
+    .report-item.report-cancel .meta {
+      color: #a23a32;
+    }
+
+    .report-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, .9fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .archive-panel {
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .archive-list {
+      display: grid;
+      gap: 10px;
+      max-height: 70vh;
+      overflow: auto;
+    }
+
+    .archive-item {
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: linear-gradient(180deg, #fff2f1, #fde6e3);
+      border: 1px solid #efb1ab;
+      box-shadow: 0 6px 18px rgba(181, 87, 75, 0.08);
+    }
+
+    .archive-item h4 {
+      font-size: .98rem;
+      margin-bottom: 6px;
+      color: #7d4a45;
+    }
+
+    .archive-item .small strong {
+      color: #8f463f;
+    }
+
+    .report-item .meta {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 700;
     }
 
     .group-chip {
@@ -509,8 +589,45 @@
 
     .overview-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
+    }
+
+    .overview-source-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom: 8px;
+    }
+
+    .overview-source-day {
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(220,205,188,0.85);
+      border-radius: 14px;
+      padding: 10px 12px;
+      display:grid;
+      gap:6px;
+    }
+
+    .overview-source-day-title {
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      font-weight:800;
+    }
+
+    .overview-source-grouplist {
+      display:grid;
+      gap:6px;
+    }
+
+    .overview-source-entry {
+      background: rgba(255,255,255,0.72);
+      border-radius: 12px;
+      padding: 8px 10px;
+      border: 1px solid rgba(220,205,188,0.75);
+      cursor:pointer;
     }
     @media (max-width: 1180px) {
     }
@@ -609,6 +726,74 @@
       padding: 20px;
       z-index: 1000;
     }
+
+    .day-cell {
+      border-color: rgba(156,132,112,0.95) !important;
+    }
+    .weekday {
+      color: #4a3c31 !important;
+    }
+    .day-top, .group-name, .group-meta, .small, .muted {
+      color: #4a3c31;
+    }
+    @media print {
+      .day-cell {
+        border-color: rgba(140,118,98,1) !important;
+      }
+      .weekday {
+        color: #40342b !important;
+      }
+      .group-name, .group-meta, .day-top, .menu-mini {
+        color: #40342b !important;
+      }
+    }
+
+
+    .group-modal .modal-card {
+      width: min(1500px, calc(100vw - 32px)) !important;
+      max-width: 1500px !important;
+    }
+    .group-modal .modal-card {
+      width: min(1580px, calc(100vw - 24px)) !important;
+      max-width: 1580px !important;
+    }
+    .group-modal .assign-grid {
+      display: grid !important;
+      grid-template-columns: 1.05fr 1fr .9fr !important;
+      gap: 16px !important;
+      align-items: start !important;
+    }
+
+
+    .group-modal .assign-grid {
+      align-items: stretch !important;
+    }
+    .group-modal .stack {
+      height: 100%;
+    }
+    .group-modal .menu-preview {
+      min-height: 0;
+    }
+    .group-modal .assignments {
+      min-height: 420px !important;
+      max-height: 68vh !important;
+    }
+
+
+    .group-modal .assignments {
+      min-height: 520px !important;
+      max-height: 74vh !important;
+    }
+
+
+    .day-delete-btn {
+      width: 20px !important;
+      height: 20px !important;
+      font-size: 11px !important;
+      padding: 0 !important;
+      border-radius: 999px !important;
+    }
+
     .modal.open { display: flex; }
     .modal-card {
       width: min(1000px, 100%);
@@ -652,6 +837,7 @@
       .stats { grid-template-columns: repeat(2, 1fr); }
       .overview-grid { grid-template-columns: repeat(2, 1fr); }
       .assign-grid { grid-template-columns: 1fr; }
+      .report-split { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 840px) {
@@ -698,7 +884,7 @@
       body.print-month-a4 #pageTitle,
       body.print-month-a4 .calendar-header .sub { display: none !important; }
 
-      @page { margin: 4mm; }
+      @page { margin: 4mm 4mm 4mm 6mm; }
 
       html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
       body.print-month-a3 .app, body.print-month-a4 .app { display:block; padding:0; min-height:auto; }
@@ -752,6 +938,15 @@
         print-color-adjust: exact;
       }
 
+
+      body.print-month-a3 #printWeekdayRow .weekday.weekend,
+      body.print-month-a4 #printWeekdayRow .weekday.weekend {
+        background: linear-gradient(180deg, #edd1b5, #dfb78f) !important;
+        color: #5c3c20 !important;
+        border: 1.4px solid #b98452 !important;
+        box-shadow: inset 0 -2px 0 rgba(120,76,36,0.18);
+      }
+
       body.print-month-a3 #printCalendarGrid .day-cell,
       body.print-month-a4 #printCalendarGrid .day-cell {
         min-height: 0 !important;
@@ -766,6 +961,20 @@
         gap:.8mm;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+      }
+
+
+      body.print-month-a3 #printCalendarGrid .day-cell.weekend,
+      body.print-month-a4 #printCalendarGrid .day-cell.weekend {
+        background: linear-gradient(180deg, #fff7ef, #f3e0ca) !important;
+        border: 1.6px solid #bd9163 !important;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.82);
+      }
+
+      body.print-month-a3 #printCalendarGrid .day-cell.weekend .day-top span:first-child,
+      body.print-month-a4 #printCalendarGrid .day-cell.weekend .day-top span:first-child {
+        color: #6c4322 !important;
+        font-weight: 900 !important;
       }
 
       body.print-month-a3 #printCalendarGrid .day-cell.other-month,
@@ -856,6 +1065,23 @@
 
       body.print-month-a4 #printCalendarGrid .menu-mini { display:none !important; }
 
+      body.print-month-a3 #printFitWrap[data-compact="1"] #printCalendarGrid .group-chip,
+      body.print-month-a4 #printFitWrap[data-compact="1"] #printCalendarGrid .group-chip { padding: 1mm 1.1mm; }
+      body.print-month-a3 #printFitWrap[data-compact="2"] #printCalendarGrid .group-chip,
+      body.print-month-a4 #printFitWrap[data-compact="2"] #printCalendarGrid .group-chip { padding: .8mm .9mm; }
+      body.print-month-a3 #printFitWrap[data-compact="2"] #printCalendarGrid .group-name,
+      body.print-month-a4 #printFitWrap[data-compact="2"] #printCalendarGrid .group-name { font-size: 6.1pt; }
+      body.print-month-a3 #printFitWrap[data-compact="2"] #printCalendarGrid .menu-mini,
+      body.print-month-a4 #printFitWrap[data-compact="2"] #printCalendarGrid .menu-mini { font-size: 5.2pt; -webkit-line-clamp: 5; }
+      body.print-month-a3 #printFitWrap[data-compact="3"] #printCalendarGrid .group-chip,
+      body.print-month-a4 #printFitWrap[data-compact="3"] #printCalendarGrid .group-chip { padding: .6mm .8mm; }
+      body.print-month-a3 #printFitWrap[data-compact="3"] #printCalendarGrid .group-name,
+      body.print-month-a4 #printFitWrap[data-compact="3"] #printCalendarGrid .group-name { font-size: 5.5pt; }
+      body.print-month-a3 #printFitWrap[data-compact="3"] #printCalendarGrid .group-meta,
+      body.print-month-a4 #printFitWrap[data-compact="3"] #printCalendarGrid .group-meta,
+      body.print-month-a3 #printFitWrap[data-compact="3"] #printCalendarGrid .menu-mini,
+      body.print-month-a4 #printFitWrap[data-compact="3"] #printCalendarGrid .menu-mini { font-size: 4.8pt; line-height: 1; -webkit-line-clamp: 4; }
+
       body.print-month-a3 .print-sheet-only {
         width: 410mm;
         height: 287mm;
@@ -888,6 +1114,7 @@
     <div class="utility-panel" id="utilityPanel">
       <div class="utility-actions">
         <button class="btn danger" id="btnClearCalendar">Kalender leeren</button>
+        <button class="btn danger" id="btnClearReport">Änderungsbericht leeren</button>
         <button class="btn" id="btnExportJson">JSON Export</button>
             <button class="btn full" id="cloudConnectBtnTools" title="Wähle eine JSON-Datei in einem OneDrive/Dropbox/Netzlaufwerk-Ordner (oder erstelle eine neue) und aktiviere Auto-Sync.">☁️ Cloud Sync verbinden</button>
             <button class="btn ghost full" id="cloudDisconnectBtnTools" title="Deaktiviert Auto-Sync (lokal funktioniert weiter).">⛔ Cloud Sync trennen</button>
@@ -926,9 +1153,10 @@
         </div>
 
         <div class="stack">
-          <label class="btn primary full" for="pmsFile">PMS Datei hochladen</label>
+          <label class="btn primary full" for="pmsFile" style="text-align:center;justify-content:center;">PMS Datei hochladen</label>
           <input id="pmsFile" type="file" accept=".csv,.txt" class="hidden" />
                     <button class="btn soft full" id="btnPrintMonthA3">Druck A3 Kalender</button>
+          <button class="btn full" id="btnExportPdfA3">PDF Export A3 Kalender</button>
           <div class="cloud-stack" style="margin-top:8px;">
             <button class="btn full" id="cloudSyncNowBtn" title="Lädt den aktuellen Stand aus der Cloud-Datei (Pull) und überschreibt den lokalen Stand.">⬇️ Cloud → Lokal</button>
             
@@ -969,6 +1197,14 @@
       <div class="section">
         <div class="section-title"><span>Menü-Vorschläge</span><button class="btn ghost" id="menuLanguageToggle" type="button">DE</button></div>
         <div class="menu-suggestion-grid" id="menuLibraryMini"></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><span>Bericht / Report</span></div>
+        <div class="stack">
+          <button class="btn full" id="btnOpenReport">Änderungsbericht öffnen</button>
+          <div id="reportMini" class="footer-note">Noch keine Änderungen protokolliert.</div>
+        </div>
       </div>
 
       <div class="section">
@@ -1047,7 +1283,7 @@
     </main>
   </div>
 
-  <div class="modal" id="groupModal">
+  <div class="modal group-modal" id="groupModal">
     <div class="modal-card">
       <div class="modal-head">
         <div>
@@ -1061,23 +1297,55 @@
           <div class="menu-preview">
             <h4>Aufenthaltsdaten</h4>
             <div id="modalStayInfo"></div>
+            <div class="field-choice">
+              <label for="modalStayName">Name ausgewählter Gruppe</label>
+              <input id="modalStayName" class="input" type="text" />
+            </div>
+            <div class="field-choice">
+              <label>Ausgewählter Tag</label>
+              <div id="modalSelectedDayDisplay" class="small stay-day-display">—</div>
+            </div>
+            <div class="field-choice">
+              <label for="modalStayPax">Pax ausgewählter Tag</label>
+              <input id="modalStayPax" class="input" type="number" min="0" step="1" />
+            </div>
+            <div class="field-choice">
+              <label for="modalMealType">Meal Art ausgewählter Tag</label>
+              <select id="modalMealType" class="input">
+                <option value="Dinner">Dinner</option>
+                <option value="Lunch">Lunch</option>
+              </select>
+            </div>
+            <div class="field-choice">
+              <label for="modalTime">Uhrzeit ausgewählter Tag</label>
+              <select id="modalTime" class="input"></select>
+            </div>
+            <div class="field-choice">
+              <label for="modalTargetDate">Ausgewählten Tag kopieren / verschieben nach</label>
+              <input id="modalTargetDate" class="input" type="date" />
+            </div>
+            <div class="grid-2">
+              <button type="button" class="btn" id="btnCopySelectedDay">Tag kopieren</button>
+              <button type="button" class="btn" id="btnMoveSelectedDay">Tag verschieben</button>
+            </div>
+            <div class="grid-2">
+              <button type="button" class="btn" id="btnSplitSelectedDay">Gruppe splitten</button>
+              <button type="button" class="btn danger" id="btnCancelSelectedDay">Tag stornieren</button>
+            </div>
           </div>
           <div class="menu-preview">
             <h4>Schnell-Menü zuordnen</h4>
             <select id="modalMenuTemplate"></select>
             <div class="grid-2">
               <button type="button" class="btn" id="btnAssignSingleDay">Nur ausgewählter Tag</button>
-              <button type="button" class="btn primary" id="btnAssignWholeStay">Alle Tage</button>
+              <button type="button" class="btn" id="btnAssignWholeStay">Alle Tage</button>
             </div>
-            <p class="small">Ideal für Gruppen, die das ganze Jahr oder den gesamten Aufenthalt das gleiche Menü möchten.</p>
+            <p class="small">Ideal für Gruppen, die das gleiche Menü direkt übernehmen sollen.</p>
+            <button type="button" class="btn danger" id="btnRemoveAllMenus">Alle Menüs dieser Gruppe entfernen</button>
           </div>
           <div class="menu-preview">
             <h4>Kommentar zum ausgewählten Tag</h4>
             <textarea id="modalDayComment" placeholder="z. B. Allergien, spätes Dinner, Spezialwunsch…"></textarea>
-          </div>
-          <div class="menu-preview">
-            <h4>Zugeordnete Tage</h4>
-            <div class="assignments" id="modalAssignments"></div>
           </div>
         </div>
         <div class="stack">
@@ -1103,11 +1371,14 @@
               <select id="modalSpecialSelect" class="input"></select>
               <input id="modalSpecial" class="input" placeholder="Optionales Spezial" />
             </div>
-            <label for="modalTime">Uhrzeit</label>
-            <input id="modalTime" class="input" type="time" step="300" />
-            <div class="small">Manuell pro Gruppe und Tag eintragen</div>
-            <label>Kommentar</label>
+                        <label>Kommentar</label>
             <textarea id="modalComment"></textarea>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="menu-preview">
+            <h4>Zugeordnete Tage</h4>
+            <div class="assignments" id="modalAssignments"></div>
           </div>
         </div>
       </div>
@@ -1157,6 +1428,30 @@
             <h4>Gespeicherte Menüs</h4>
             <div class="stack" id="menuLibraryFull"></div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="reportModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2>Änderungsbericht</h2>
+          <p class="sub">Importe, Pax-Änderungen, Stornos, Kommentare, Uhrzeiten und neue Gruppen.</p>
+        </div>
+        <button class="btn ghost" id="closeReportBtn">Schliessen</button>
+      </div>
+      <div id="reportMeta" class="footer-note" style="margin-bottom:12px;"></div>
+      <div class="report-split">
+        <div>
+          <h3 style="margin:0 0 10px 0;">Änderungsverlauf</h3>
+          <div id="reportList" class="report-list"></div>
+        </div>
+        <div class="archive-panel">
+          <h3 style="margin:0 0 8px 0;">Storno-Archiv</h3>
+          <p class="sub" style="margin-bottom:10px;">Gruppen/Tage, die im letzten PMS-Import nicht mehr vorhanden sind.</p>
+          <div id="archiveList" class="archive-list"></div>
         </div>
       </div>
     </div>
@@ -1271,7 +1566,10 @@
       importWarnings: [],
       menuLanguage: 'de',
       editingMenuId: null,
-      kpiCollapsed: false
+      kpiCollapsed: false,
+      latestImportDailyTotals: {},
+      latestImportAt: null,
+      changeLog: []
     };
 
     const els = {
@@ -1307,6 +1605,16 @@
       modalTitle: document.getElementById('modalTitle'),
       modalSub: document.getElementById('modalSub'),
       modalStayInfo: document.getElementById('modalStayInfo'),
+      modalStayName: document.getElementById('modalStayName'),
+      modalSelectedDayDisplay: document.getElementById('modalSelectedDayDisplay'),
+      modalStayPax: document.getElementById('modalStayPax'),
+      modalMealType: document.getElementById('modalMealType'),
+      modalTargetDate: document.getElementById('modalTargetDate'),
+      btnCopySelectedDay: document.getElementById('btnCopySelectedDay'),
+      btnMoveSelectedDay: document.getElementById('btnMoveSelectedDay'),
+      btnSplitSelectedDay: document.getElementById('btnSplitSelectedDay'),
+      btnCancelSelectedDay: document.getElementById('btnCancelSelectedDay'),
+      btnRemoveAllMenus: document.getElementById('btnRemoveAllMenus'),
       modalAssignments: document.getElementById('modalAssignments'),
       modalMenuTemplate: document.getElementById('modalMenuTemplate'),
       modalStarterSelect: document.getElementById('modalStarterSelect'),
@@ -1342,7 +1650,12 @@
       cloudFunctionToken: document.getElementById('cloudFunctionToken'),
       cloudFunctionPayload: document.getElementById('cloudFunctionPayload'),
       importErrorBanner: document.getElementById('importErrorBanner'),
-      menuLanguageToggle: document.getElementById('menuLanguageToggle')
+      menuLanguageToggle: document.getElementById('menuLanguageToggle'),
+      reportMini: document.getElementById('reportMini'),
+      reportModal: document.getElementById('reportModal'),
+      reportList: document.getElementById('reportList'),
+      reportMeta: document.getElementById('reportMeta'),
+      archiveList: document.getElementById('archiveList')
     };
 
     function loadState() {
@@ -1358,6 +1671,9 @@
         state.menuLibrary = [...structuredClone(defaultMenus), ...customMenus];
         state.currentMonth = parsed.currentMonth ?? state.currentMonth;
         state.currentYear = parsed.currentYear ?? state.currentYear;
+        state.latestImportDailyTotals = parsed.latestImportDailyTotals || {};
+        state.latestImportAt = parsed.latestImportAt || null;
+        state.changeLog = Array.isArray(parsed.changeLog) ? parsed.changeLog : [];
       } else {
         state.menuLibrary = structuredClone(defaultMenus);
         importRows(demoRows, true);
@@ -1375,7 +1691,13 @@
         menuLibrary: state.menuLibrary,
         currentMonth: state.currentMonth,
         currentYear: state.currentYear,
-        cloud: state.cloud
+        latestImportDailyTotals: state.latestImportDailyTotals,
+        latestImportAt: state.latestImportAt,
+        changeLog: state.changeLog,
+        cloud: state.cloud,
+        latestImportDailyTotals: state.latestImportDailyTotals,
+        latestImportAt: state.latestImportAt,
+        changeLog: state.changeLog
       }));
       saveCloudSettings();
     }
@@ -1537,6 +1859,9 @@
         : structuredClone(defaultMenus);
       state.currentMonth = Number.isInteger(incoming.currentMonth) ? incoming.currentMonth : state.currentMonth;
       state.currentYear = Number.isInteger(incoming.currentYear) ? incoming.currentYear : state.currentYear;
+      state.latestImportDailyTotals = incoming.latestImportDailyTotals || {};
+      state.latestImportAt = incoming.latestImportAt || null;
+      state.changeLog = Array.isArray(incoming.changeLog) ? incoming.changeLog : [];
       saveStateLocal();
       render();
     }
@@ -1603,7 +1928,10 @@
         menuLibrary: state.menuLibrary,
         currentMonth: state.currentMonth,
         currentYear: state.currentYear,
-        cloud: state.cloud
+        cloud: state.cloud,
+        latestImportDailyTotals: state.latestImportDailyTotals,
+        latestImportAt: state.latestImportAt,
+        changeLog: state.changeLog
       }));
       if (typeof saveCloudSettings === 'function') saveCloudSettings();
     }
@@ -1649,6 +1977,15 @@
       const m = String(dateObj.getMonth() + 1).padStart(2, '0');
       const d = String(dateObj.getDate()).padStart(2, '0');
       return `${y}-${m}-${d}`;
+    }
+
+
+    function formatTimeSwiss(value) {
+      if (!value) return '';
+      const m = String(value).match(/^(\d{1,2}):(\d{2})/);
+      if (!m) return String(value).replace(/\s?(AM|PM|am|pm)/g, '');
+      const hh = String(m[1]).padStart(2, '0');
+      return `${hh}:${m[2]}`;
     }
 
     function formatDate(dateStr) {
@@ -1769,7 +2106,10 @@
         menuLibrary: state.menuLibrary,
         currentMonth: state.currentMonth,
         currentYear: state.currentYear,
-        cloud: state.cloud
+        cloud: state.cloud,
+        latestImportDailyTotals: state.latestImportDailyTotals,
+        latestImportAt: state.latestImportAt,
+        changeLog: state.changeLog
       };
     }
 
@@ -1845,6 +2185,7 @@
 
     function getLocalizedMenu(menu) {
       if (!menu) return null;
+      if (menu.manualOverride) return menu;
       const suggested = getSuggestedMenuTranslation(menu);
       if (suggested) {
         return {
@@ -1935,15 +2276,25 @@
       renderMenuOptionSelect(els.menuSpecialSelect, MENU_OPTIONS.special, 'Spezial wählen…');
     }
 
+    function isDateInCurrentMonth(dateStr) {
+      if (!dateStr) return false;
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.getFullYear() === state.currentYear && d.getMonth() === state.currentMonth;
+    }
+
+    function stayHasCurrentMonthDate(stay) {
+      return (stay?.dates || []).some(isDateInCurrentMonth);
+    }
+
     function getVisibleStays() {
       return state.stays.filter(stay => {
         const text = `${stay.groupName} ${stay.source}`.toLowerCase();
         const search = state.filters.search.toLowerCase().trim();
         if (search && !text.includes(search)) return false;
         if (state.filters.source && stay.source !== state.filters.source) return false;
-        if (state.filters.status === 'active' && !stay.active) return false;
-        if (state.filters.status === 'stale' && stay.active) return false;
-        return true;
+        if (state.filters.status === 'stale') return stay.active === false;
+        if (state.filters.status === 'active') return stay.active !== false;
+        return stay.active !== false;
       });
     }
 
@@ -1951,31 +2302,231 @@
       return getVisibleStays().filter(stay => stay.dates.includes(dateStr));
     }
 
+
+    function getMealLabel(stay, dateStr) {
+      const assignment = getAssignment(stay, dateStr);
+      return assignment?.mealType || 'Dinner';
+    }
+
+
+
+    function cancelSelectedDay(stayId = null, dateStr = null) {
+      const targetStayId = stayId || state.selected?.stayId;
+      const targetDate = dateStr || state.selected?.dateStr;
+      if (!targetStayId || !targetDate) return;
+      const stay = getStayById(targetStayId);
+      if (!stay) return;
+
+      delete stay.personsByDate?.[targetDate];
+      if (stay.assignments) delete stay.assignments[targetDate];
+      stay.dates = (stay.dates || []).filter(d => d !== targetDate);
+
+      if (!stay.dates.length) {
+        state.stays = state.stays.filter(s => s.id !== stay.id);
+      } else {
+        stay.startDate = stay.dates[0];
+        stay.endDate = stay.dates[stay.dates.length - 1];
+      }
+
+      logChange('cancel', `${stay.groupName}: ${formatDate(targetDate)} wurde storniert/entfernt.`, { stayId: stay.id, date: targetDate, dates: [targetDate] });
+      saveState();
+      render();
+      if (state.selected?.stayId === targetStayId) closeModals();
+    }
+
+    function removeAllMenusForSelectedStay() {
+      const sel = state.selected;
+      if (!sel) return;
+      const stay = getStayById(sel.stayId);
+      if (!stay) return;
+      Object.keys(stay.assignments || {}).forEach(date => {
+        if (stay.assignments[date]) delete stay.assignments[date].menu;
+        if (stay.assignments[date] && !stay.assignments[date].comment && !stay.assignments[date].time && !stay.assignments[date].mealType) {
+          delete stay.assignments[date];
+        }
+      });
+      saveState();
+      render();
+      openStayModal(stay.id, sel.dateStr);
+    }
+
+    function splitSelectedDayIntoNewGroup() {
+      const sel = state.selected;
+      if (!sel) return;
+      const stay = getStayById(sel.stayId);
+      if (!stay) return;
+      const dateStr = sel.dateStr;
+      const pax = Number(stay.personsByDate?.[dateStr] || 0);
+      if (pax <= 1) {
+        alert('Zum Splitten werden mindestens 2 Pax benötigt.');
+        return;
+      }
+
+      const clonePax = Math.floor(pax / 2);
+      const originalPax = pax - clonePax;
+      stay.personsByDate[dateStr] = originalPax;
+
+      const clone = JSON.parse(JSON.stringify(stay));
+      clone.id = 'stay_' + Math.random().toString(36).slice(2, 10);
+      clone.groupName = `${stay.groupName} ${clonePax}`;
+      clone.startDate = dateStr;
+      clone.endDate = dateStr;
+      clone.dates = [dateStr];
+      clone.personsByDate = { [dateStr]: clonePax };
+      clone.assignments = stay.assignments?.[dateStr] ? { [dateStr]: JSON.parse(JSON.stringify(stay.assignments[dateStr])) } : {};
+      clone.active = stay.active;
+      clone.mergeKey = (stay.mergeKey || `${stay.groupName}__${stay.source}`) + '__split__' + clone.id;
+
+      state.stays.push(clone);
+      logChange('split', `${stay.groupName}: ${formatDate(dateStr)} wurde gesplittet (${originalPax} / ${clonePax} Pax).`);
+      saveState();
+      render();
+      openStayModal(clone.id, dateStr);
+    }
+
+    function listDatesInclusive(startIso, endIso) {
+      const out = [];
+      if (!startIso || !endIso) return out;
+      const start = new Date(startIso + 'T00:00:00');
+      const end = new Date(endIso + 'T00:00:00');
+      if (isNaN(start) || isNaN(end)) return out;
+      const dir = start <= end ? 1 : -1;
+      let cur = new Date(start);
+      while (true) {
+        out.push(toIsoDate(cur));
+        if (toIsoDate(cur) === toIsoDate(end)) break;
+        cur.setDate(cur.getDate() + dir);
+      }
+      return out.sort();
+    }
+
+
+    function copyOrMoveSelectedDay(mode = 'copy') {
+      const sel = state.selected;
+      if (!sel) return;
+      const stay = getStayById(sel.stayId);
+      if (!stay) return;
+      const fromDate = sel.dateStr;
+      const toDate = els.modalTargetDate?.value || '';
+      if (!toDate) {
+        alert('Bitte zuerst ein Zieldatum wählen.');
+        return;
+      }
+      if (toDate === fromDate && mode === 'move') return;
+
+      const sourceAssignment = stay.assignments?.[fromDate] ? JSON.parse(JSON.stringify(stay.assignments[fromDate])) : null;
+      const sourcePax = stay.personsByDate?.[fromDate] ?? 0;
+
+      if (!stay.dates.includes(toDate)) {
+        stay.dates.push(toDate);
+        stay.dates = Array.from(new Set(stay.dates)).sort();
+        stay.startDate = stay.dates[0];
+        stay.endDate = stay.dates[stay.dates.length - 1];
+      }
+
+      if (!stay.personsByDate) stay.personsByDate = {};
+      stay.personsByDate[toDate] = sourcePax;
+
+      if (sourceAssignment) {
+        if (!stay.assignments) stay.assignments = {};
+        stay.assignments[toDate] = sourceAssignment;
+      }
+
+      if (mode === 'move') {
+        delete stay.personsByDate[fromDate];
+        if (stay.assignments) delete stay.assignments[fromDate];
+        stay.dates = stay.dates.filter(d => d !== fromDate);
+        if (!stay.dates.length) stay.dates = [toDate];
+        stay.startDate = stay.dates[0];
+        stay.endDate = stay.dates[stay.dates.length - 1];
+      }
+
+      logChange(mode === 'move' ? 'move' : 'copy', `${stay.groupName}: ${formatDate(fromDate)} wurde ${mode === 'move' ? 'nach' : 'auf'} ${formatDate(toDate)} ${mode === 'move' ? 'verschoben' : 'kopiert'}.`);
+      saveState();
+      render();
+      openStayModal(stay.id, toDate);
+    }
+
+    function applyStayMetaEdits(stay, selectedDate) {
+      const effectiveDate = stay.dates.includes(selectedDate) ? selectedDate : stay.startDate;
+      if (els.modalStayName) {
+        const newName = els.modalStayName.value.trim();
+        if (newName) stay.groupName = newName;
+      }
+      if (effectiveDate) {
+        if (els.modalStayPax) {
+          const paxVal = Number(els.modalStayPax.value);
+          stay.personsByDate[effectiveDate] = Number.isFinite(paxVal) && paxVal >= 0 ? paxVal : (stay.personsByDate[effectiveDate] || 0);
+        }
+        const ass = ensureAssignment(stay, effectiveDate);
+        if (els.modalMealType?.value) ass.mealType = els.modalMealType.value;
+      }
+      return effectiveDate;
+    }
+
     function getAssignment(stay, dateStr) {
       return stay.assignments?.[dateStr] || null;
     }
 
+    function logChange(type, message, meta = {}) {
+      const entry = { id: crypto.randomUUID(), ts: new Date().toISOString(), type, message, meta };
+      state.changeLog = [entry, ...(state.changeLog || [])].slice(0, 250);
+    }
+
+    function getStayBaseKey(stay) {
+      if (!stay) return '';
+      if (stay.parentBaseKey) return stay.parentBaseKey;
+      if (stay.mergeKey) {
+        const parts = String(stay.mergeKey).split('__');
+        if (parts.length >= 3) return parts.slice(0, 3).join('__');
+      }
+      return `${stay.groupName}__${stay.source}__${stay.halfboard ? 'HB' : 'NOHB'}`;
+    }
+
+    function getImportedTotalForDate(dateStr) {
+      return Number(state.latestImportDailyTotals?.[dateStr] || 0);
+    }
+
+    function getDisplayedTotalForDate(dateStr) {
+      return getEventsForDate(dateStr).reduce((sum, stay) => sum + Number(stay.personsByDate?.[dateStr] || 0), 0);
+    }
+
+    function getDailyTotalBadgeHtml(dateStr, fallbackTotal = 0) {
+      const expected = getImportedTotalForDate(dateStr);
+      const current = getDisplayedTotalForDate(dateStr);
+      const shown = expected || fallbackTotal || current;
+      if (!shown) return '';
+      const mismatch = expected > 0 && expected !== current;
+      const title = mismatch ? `PMS Total ${expected} / Aktuell verteilt ${current} – bitte Pax manuell anpassen` : `PMS Total ${shown}`;
+      return `<span class="person-total ${mismatch ? 'mismatch' : ''}" title="${escapeHtml(title)}">${shown} Total Pax${mismatch ? ' !' : ''}</span>`;
+    }
+
+    function buildImportDailyTotals(rows) {
+      return rows.reduce((acc, row) => {
+        if (!row?.date) return acc;
+        acc[row.date] = Number(acc[row.date] || 0) + Number(row.persons || 0);
+        return acc;
+      }, {});
+    }
+
+    function compactDateList(dates) {
+      return (dates || []).slice().sort().map(formatDate).join(', ');
+    }
+
     function importRows(rows, isInitial = false) {
-      const previousByKey = new Map(state.stays.map(stay => [stay.mergeKey, stay]));
+      const previousStays = Array.isArray(state.stays) ? state.stays.map(stay => JSON.parse(JSON.stringify(stay))) : [];
+      const previousByKey = new Map(previousStays.map(stay => [stay.mergeKey, stay]));
       const previousByBase = new Map();
-      state.stays.forEach(stay => {
-        const base = `${stay.groupName}__${stay.source}`;
+      previousStays.forEach(stay => {
+        const base = getStayBaseKey(stay);
         if (!previousByBase.has(base)) previousByBase.set(base, []);
         previousByBase.get(base).push(stay);
       });
       const grouped = new Map();
       const looksLikePkgForecast = looksLikePkgForecastFile(rows);
-      state.lastImportMeta = {
-        fileType: looksLikePkgForecast ? 'pkgforecast' : 'generic',
-        note: looksLikePkgForecast
-          ? 'PMS-Import erkannt: Forecast-Datei. Es werden nur Datensätze mit Personen > 0 verwendet. Bei pkgforecast wird TOTAL_PKGS bevorzugt; SUMTOTAL_PKGS dient nur als Fallback.'
-          : 'Standard-Import aktiv.'
-      };
+      state.lastImportMeta = { fileType: looksLikePkgForecast ? 'pkgforecast' : 'generic', note: looksLikePkgForecast ? '' : 'Standard-Import aktiv.' };
       state.importWarnings = [];
-
-      if (looksLikePkgForecast) {
-        rows = preprocessPkgForecastRows(rows);
-      }
+      if (looksLikePkgForecast) rows = preprocessPkgForecastRows(rows);
 
       rows.forEach(row => {
         const date = normalizeDate(row.date || row.datum || row['anreise'] || row.arrival || row.tag || row['datum von'] || row.stay_date || row.stay_date_char);
@@ -1987,81 +2538,131 @@
         const source = humanSource(rawSource || rawName || '');
         const halfboard = inferHalfboard(row, rawSource, rawName);
         if (!date || persons <= 0) return;
-        if (!halfboard && looksLikePkgForecast) {
-          state.importWarnings.push(`${formatDate(date)} · ${groupName} wurde nicht als Halfboard erkannt und wird deshalb ohne Halfboard angezeigt.`);
-        }
+        if (!halfboard && looksLikePkgForecast) state.importWarnings.push(`${formatDate(date)} · ${groupName} wurde nicht als Halfboard erkannt und wird deshalb ohne Halfboard angezeigt.`);
         const key = `${groupName}__${source}__${halfboard ? 'HB' : 'NOHB'}`;
         if (!grouped.has(key)) grouped.set(key, []);
         grouped.get(key).push({ date, persons, groupName, source, halfboard });
       });
 
+      const importedDailyTotals = buildImportDailyTotals(rows);
       const next = [];
+      const seenPrevIds = new Set();
+      const importMessages = [];
+
       grouped.forEach((entries, baseKey) => {
         entries.sort((a,b) => a.date.localeCompare(b.date));
         const chunks = [];
         let current = [];
         entries.forEach((entry, index) => {
-          if (!current.length) {
-            current.push(entry);
-            return;
+          if (!current.length) current.push(entry);
+          else {
+            const prevEntry = current[current.length - 1];
+            const prevDate = new Date(prevEntry.date + 'T00:00:00');
+            const curDate = new Date(entry.date + 'T00:00:00');
+            const diffDays = Math.round((curDate - prevDate) / 86400000);
+            if (diffDays <= 1 && prevEntry.halfboard === entry.halfboard) current.push(entry);
+            else { chunks.push(current); current = [entry]; }
           }
-          const prevEntry = current[current.length - 1];
-          const prevDate = new Date(prevEntry.date + 'T00:00:00');
-          const curDate = new Date(entry.date + 'T00:00:00');
-          const diffDays = Math.round((curDate - prevDate) / 86400000);
-          if (diffDays <= 1 && prevEntry.halfboard === entry.halfboard) {
-            current.push(entry);
-          } else {
-            chunks.push(current);
-            current = [entry];
-          }
-          if (index === entries.length - 1) chunks.push(current);
+          if (index === entries.length - 1 && current.length) chunks.push(current);
         });
-        if (entries.length === 1) chunks.push(entries);
+        if (entries.length === 1 && !chunks.length) chunks.push(entries);
 
         chunks.forEach(chunk => {
           const dates = chunk.map(e => e.date);
+          const first = chunk[0];
           const mergeKey = `${baseKey}__${dates[0]}__${dates[dates.length - 1]}`;
           const prevExact = previousByKey.get(mergeKey);
-          const prevCandidates = previousByBase.get(baseKey) || [];
-          const prevOverlap = prevCandidates.find(candidate => dates.some(d => candidate.dates?.includes(d)));
-          const prev = prevExact || prevOverlap;
-          const assignments = {};
-          const personsByDate = {};
+          const prevCandidates = (previousByBase.get(baseKey) || []).filter(candidate => (candidate.dates || []).some(d => dates.includes(d)) || candidate.mergeKey === mergeKey);
+          const primaryPrev = prevExact || prevCandidates.find(c => !c.isSplit) || prevCandidates[0] || null;
+          const subgroups = new Map();
 
-          dates.forEach(entryDate => {
-            const found = chunk.find(e => e.date === entryDate);
-            personsByDate[entryDate] = found?.persons || 0;
-            if (prev?.assignments?.[entryDate]) assignments[entryDate] = prev.assignments[entryDate];
+          dates.forEach(dateStr => {
+            let dateCandidates = prevCandidates.filter(stay => (stay.dates || []).includes(dateStr)).sort((a,b) => Number(!!a.isSplit) - Number(!!b.isSplit));
+            if (!dateCandidates.length) dateCandidates = [primaryPrev].filter(Boolean);
+            if (!dateCandidates.length) {
+              dateCandidates = [{ id: crypto.randomUUID(), groupName: first.groupName, source: first.source, halfboard: first.halfboard, assignments: {}, isSplit: false }];
+            }
+            const importedPersons = Number(chunk.find(e => e.date === dateStr)?.persons || 0);
+            const count = dateCandidates.length;
+            const base = Math.floor(importedPersons / count);
+            let remainder = importedPersons - (base * count);
+            dateCandidates.forEach((candidate, idx) => {
+              const subgroupKey = candidate.id || `${mergeKey}__${idx}`;
+              if (!subgroups.has(subgroupKey)) {
+                subgroups.set(subgroupKey, {
+                  prev: candidate,
+                  id: candidate.id || crypto.randomUUID(),
+                  groupName: candidate.groupName || first.groupName,
+                  source: first.source,
+                  halfboard: first.halfboard,
+                  dates: [],
+                  personsByDate: {},
+                  assignments: {},
+                  isSplit: !!candidate.isSplit,
+                  parentBaseKey: baseKey
+                });
+              }
+              const target = subgroups.get(subgroupKey);
+              const pax = base + (remainder > 0 ? 1 : 0);
+              if (remainder > 0) remainder -= 1;
+              target.dates.push(dateStr);
+              target.personsByDate[dateStr] = pax;
+              if (candidate.assignments?.[dateStr]) target.assignments[dateStr] = JSON.parse(JSON.stringify(candidate.assignments[dateStr]));
+            });
           });
 
-          const first = chunk[0];
-          next.push({
-            id: prev?.id || crypto.randomUUID(),
-            mergeKey,
-            groupName: first.groupName,
-            source: first.source,
-            halfboard: chunk.some(e => e.halfboard),
-            active: true,
-            startDate: dates[0],
-            endDate: dates[dates.length - 1],
-            dates,
-            personsByDate,
-            assignments,
-            importTimestamp: new Date().toISOString()
+          Array.from(subgroups.values()).forEach((sg, idx, arr) => {
+            const stayDates = Array.from(new Set(sg.dates)).sort();
+            if (!stayDates.length) return;
+            if (sg.prev?.id) seenPrevIds.add(sg.prev.id);
+            const isSplit = arr.length > 1 || sg.isSplit;
+            const mergeKeyOut = (!isSplit && idx === 0) ? `${baseKey}__${stayDates[0]}__${stayDates[stayDates.length - 1]}` : (sg.prev?.mergeKey || `${baseKey}__split__${sg.id}`);
+            next.push({
+              id: sg.id,
+              mergeKey: mergeKeyOut,
+              parentBaseKey: baseKey,
+              isSplit,
+              groupName: sg.groupName,
+              source: sg.source,
+              halfboard: sg.halfboard,
+              active: true,
+              startDate: stayDates[0],
+              endDate: stayDates[stayDates.length - 1],
+              dates: stayDates,
+              personsByDate: sg.personsByDate,
+              assignments: sg.assignments,
+              importTimestamp: new Date().toISOString()
+            });
           });
         });
       });
 
-      previousByKey.forEach((prev, key) => {
-        if (!next.some(n => n.mergeKey === key)) {
-          next.push({ ...prev, active: false });
-        }
+      previousStays.forEach(prev => {
+        if (seenPrevIds.has(prev.id)) return;
+        const hadVisibleDates = (prev.dates || []).length > 0;
+        if (!hadVisibleDates) return;
+        importMessages.push(`${prev.groupName}: nicht mehr im neuen PMS-Import für ${compactDateList(prev.dates || [])}.`);
+        logChange('cancel-import', `${prev.groupName}: nicht mehr im neuen PMS-Import für ${compactDateList(prev.dates || [])}.`, { stayId: prev.id, dates: prev.dates || [] });
       });
 
       state.stays = next.sort((a,b) => a.startDate.localeCompare(b.startDate) || a.groupName.localeCompare(b.groupName));
+      state.latestImportDailyTotals = importedDailyTotals;
+      state.latestImportAt = new Date().toISOString();
+
+      const prevActiveMap = new Map();
+      previousStays.filter(s => s.active !== false).forEach(stay => (stay.dates || []).forEach(date => prevActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
+      const newActiveMap = new Map();
+      state.stays.filter(s => s.active !== false).forEach(stay => (stay.dates || []).forEach(date => newActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
+      let newCount = 0, paxChanged = 0, cancelledCount = 0;
+      newActiveMap.forEach((persons, key) => { if (!prevActiveMap.has(key)) newCount += 1; else if (prevActiveMap.get(key) != persons) paxChanged += 1; });
+      prevActiveMap.forEach((_, key) => { if (!newActiveMap.has(key)) cancelledCount += 1; });
+
+      if (!isInitial) {
+        logChange('import', `PMS-Import aktualisiert: ${newCount} neue Tag(e), ${cancelledCount} stornierte/entfernte Tag(e), ${paxChanged} Pax-Änderung(en).`, { newCount, cancelledCount, paxChanged, rows: rows.length });
+      }
+
       if (!isInitial && rows.length) {
-        const latestDate = next.filter(s => s.active).map(s => s.startDate).sort()[0];
+        const latestDate = state.stays.filter(s => s.active).map(s => s.startDate).sort()[0];
         if (latestDate) {
           const dt = new Date(latestDate);
           state.currentMonth = dt.getMonth();
@@ -2118,23 +2719,42 @@
       renderStats();
       renderMonths();
       renderMenuLibrary();
+      renderMenuTemplateOptions();
+      renderTimeOptions();
+      renderReport();
       renderCalendar();
       renderOverview();
       syncQuickSelectors();
       saveState();
     }
 
+    function getCancelledCountForCurrentMonth() {
+      const items = Array.isArray(state.changeLog) ? state.changeLog : [];
+      return items.filter(item => {
+        const type = String(item?.type || '').toLowerCase();
+        if (!(type.includes('cancel'))) return false;
+        const dates = Array.isArray(item?.meta?.dates) ? item.meta.dates : (item?.meta?.date ? [item.meta.date] : []);
+        if (dates.length) return dates.some(isDateInCurrentMonth);
+        const ts = item?.ts ? new Date(item.ts) : null;
+        return !!ts && ts.getFullYear() === state.currentYear && ts.getMonth() === state.currentMonth;
+      }).length;
+    }
+
     function renderStats() {
       const visible = getVisibleStays();
-      const active = visible.filter(s => s.active);
-      const stale = visible.filter(s => !s.active);
-      const totalPersons = active.reduce((sum, stay) => sum + Object.values(stay.personsByDate || {}).reduce((a,b) => a + b, 0), 0);
-      const menuDays = active.reduce((sum, stay) => sum + Object.keys(stay.assignments || {}).length, 0);
+      const monthStays = visible.filter(stayHasCurrentMonthDate);
+      const totalPersons = monthStays.reduce((sum, stay) => {
+        return sum + Object.entries(stay.personsByDate || {}).reduce((inner, [dateStr, pax]) => inner + (isDateInCurrentMonth(dateStr) ? Number(pax || 0) : 0), 0);
+      }, 0);
+      const menuDays = monthStays.reduce((sum, stay) => {
+        return sum + Object.keys(stay.assignments || {}).filter(isDateInCurrentMonth).length;
+      }, 0);
+      const cancelledMonth = getCancelledCountForCurrentMonth();
       els.stats.innerHTML = [
-        { k: active.length, l: 'Aktive Gruppen' },
-        { k: stale.length, l: 'Offen / storniert?' },
-        { k: totalPersons, l: 'Pax-Tage (sichtbar)' },
-        { k: menuDays, l: 'Tage mit Menü' }
+        { k: monthStays.length, l: 'Aktive Gruppen im Monat' },
+        { k: totalPersons, l: 'Pax im Monat' },
+        { k: menuDays, l: 'Tage mit Menü im Monat' },
+        { k: cancelledMonth, l: 'Stornos im Monat' }
       ].map(stat => `<div class="stat"><div class="k">${stat.k}</div><div class="l">${stat.l}</div></div>`).join('');
     }
 
@@ -2146,6 +2766,50 @@
         state.currentMonth = Number(btn.dataset.month);
         render();
       });
+    }
+
+    function getReportItemClass(item) {
+      const type = String(item?.type || '').toLowerCase();
+      const msg = String(item?.message || '').toLowerCase();
+      return (type.includes('cancel') || type.includes('storno') || msg.includes('storni') || msg.includes('nicht mehr im neuen pms-import')) ? 'report-cancel' : '';
+    }
+
+
+    function getArchivedStays() {
+      return (state.stays || []).filter(stay => stay.active === false).sort((a, b) => {
+        const aDate = (a.endDate || a.startDate || '');
+        const bDate = (b.endDate || b.startDate || '');
+        return bDate.localeCompare(aDate) || String(a.groupName || '').localeCompare(String(b.groupName || ''));
+      });
+    }
+
+    function getStayTotalPax(stay) {
+      return Object.values(stay?.personsByDate || {}).reduce((sum, pax) => sum + Number(pax || 0), 0);
+    }
+
+    function renderReport() {
+      const items = Array.isArray(state.changeLog) ? state.changeLog : [];
+      const archived = getArchivedStays();
+      if (els.reportMini) els.reportMini.innerHTML = items.slice(0, 3).map(item => `${new Date(item.ts).toLocaleString('de-DE')}: ${escapeHtml(item.message)}`).join('<br>') || 'Noch keine Änderungen protokolliert.';
+      if (els.reportMeta) els.reportMeta.textContent = `Letzter PMS-Import: ${state.latestImportAt ? new Date(state.latestImportAt).toLocaleString('de-DE') : '—'} • Archivierte Stornos: ${archived.length}`;
+      if (els.reportList) els.reportList.innerHTML = items.length ? items.map(item => `
+          <div class="report-item ${getReportItemClass(item)}">
+            <div class="meta">${new Date(item.ts).toLocaleString('de-DE')} • ${escapeHtml(item.type || 'info')}</div>
+            <div>${escapeHtml(item.message || '')}</div>
+          </div>
+        `).join('') : '<div class="sub">Noch keine Änderungen vorhanden.</div>';
+      if (els.archiveList) els.archiveList.innerHTML = archived.length ? archived.map(stay => {
+        const dates = (stay.dates || []).slice().sort();
+        const dateLabel = dates.length === 1 ? formatDate(dates[0]) : `${formatDate(dates[0])} – ${formatDate(dates[dates.length - 1])}`;
+        return `
+          <div class="archive-item">
+            <h4>${escapeHtml(stay.groupName || 'Unbenannte Gruppe')}</h4>
+            <div class="small"><strong>Quelle:</strong> ${escapeHtml(stay.source || '—')}</div>
+            <div class="small"><strong>Zeitraum:</strong> ${dateLabel || '—'}</div>
+            <div class="small"><strong>Pax zuletzt:</strong> ${getStayTotalPax(stay)}</div>
+          </div>
+        `;
+      }).join('') : '<div class="sub">Noch keine Stornos im Archiv.</div>';
     }
 
     function renderCalendar() {
@@ -2169,7 +2833,7 @@
           <div class="day-cell ${d.getMonth() !== state.currentMonth ? 'other-month' : ''} ${iso === today ? 'today' : ''} ${isWeekend ? 'weekend' : ''}">
             <div class="day-top">
               <span>${d.getDate()}</span>
-              ${totalPersons ? `<span class="person-total">${totalPersons} Total Pax</span>` : ''}
+              ${getDailyTotalBadgeHtml(iso, totalPersons)}
             </div>
             ${events.map(stay => {
               const assignment = getAssignment(stay, iso);
@@ -2177,10 +2841,13 @@
                 <div class="group-chip ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'}" data-stay-id="${stay.id}" data-date="${iso}">
                   <div class="group-row">
                     <div class="group-name" title="${escapeHtml(stay.groupName)}">${escapeHtml(stay.groupName)}</div>
-                    <span class="badge">${stay.personsByDate?.[iso] || 0} Pax</span>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                      <span class="badge">${stay.personsByDate?.[iso] || 0} Pax</span>
+                      <button type="button" class="mini-delete-btn day-delete-btn" data-cancel-stay="${stay.id}" data-cancel-date="${iso}" title="Tag stornieren">×</button>
+                    </div>
                   </div>
-                  <div class="group-meta">${escapeHtml(stay.source)} • Halfboard</div>
-                  ${assignment ? `<div class="menu-mini">${assignment?.time ? escapeHtml(assignment.time) + ' • ' : ''}${escapeHtml(getAssignmentDisplayText(assignment))}</div>` : ''}
+                  <div class="group-meta">${escapeHtml(getMealLabel(stay, iso))}</div>
+                  ${assignment ? `<div class="menu-mini">${assignment?.time ? '🕒 ' + escapeHtml(formatTimeSwiss(assignment.time)) + ' • ' : ''}${escapeHtml(getAssignmentDisplayText(assignment))}</div>` : ''}
                 </div>
               `;
             }).join('')}
@@ -2191,45 +2858,79 @@
       document.querySelectorAll('.group-chip').forEach(chip => {
         chip.onclick = () => openStayModal(chip.dataset.stayId, chip.dataset.date);
       });
+      document.querySelectorAll('.day-delete-btn').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          cancelSelectedDay(btn.dataset.cancelStay, btn.dataset.cancelDate);
+        };
+      });
     }
 
     function renderOverview() {
-      const visible = getVisibleStays();
-      els.overviewGrid.innerHTML = visible.map(stay => {
-        const assignmentCount = Object.keys(stay.assignments || {}).length;
-        const rows = stay.dates.map(date => {
-          const assignment = getAssignment(stay, date);
-          const isActiveDate = state.selected?.stayId === stay.id && state.selected?.dateStr === date;
+      const visible = getVisibleStays().filter(stayHasCurrentMonthDate);
+      const grouped = new Map();
+      visible.forEach(stay => {
+        const sourceKey = stay.source || 'Ohne Quelle';
+        if (!grouped.has(sourceKey)) grouped.set(sourceKey, { source: sourceKey, stays: [], dates: new Map() });
+        const bucket = grouped.get(sourceKey);
+        bucket.stays.push(stay);
+        (stay.dates || []).filter(isDateInCurrentMonth).forEach(dateStr => {
+          if (!bucket.dates.has(dateStr)) bucket.dates.set(dateStr, []);
+          bucket.dates.get(dateStr).push(stay);
+        });
+      });
+
+      const html = Array.from(grouped.values()).sort((a,b) => a.source.localeCompare(b.source)).map(bucket => {
+        const monthPax = bucket.stays.reduce((sum, stay) => sum + Object.entries(stay.personsByDate || {}).reduce((inner, [dateStr, pax]) => inner + (isDateInCurrentMonth(dateStr) ? Number(pax || 0) : 0), 0), 0);
+        const menuDays = bucket.stays.reduce((sum, stay) => sum + Object.keys(stay.assignments || {}).filter(isDateInCurrentMonth).length, 0);
+        const rows = Array.from(bucket.dates.entries()).sort((a,b) => a[0].localeCompare(b[0])).map(([dateStr, stays]) => {
+          const totalPax = stays.reduce((sum, stay) => sum + Number(stay.personsByDate?.[dateStr] || 0), 0);
           return `
-            <div class="assignment-row ${isActiveDate ? 'active-day' : ''}" onclick="window.__openStay('${stay.id}','${date}')">
-              <div class="overview-date">${formatDate(date)}</div>
-              <div>
-                ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(assignment.time)}</div>` : ''}
-                <div>${assignment ? escapeHtml(getAssignmentDisplayText(assignment)) : '<span class="muted">Kein Menü</span>'}</div>
-                ${assignment?.comment ? `<div class="small assignment-comment-strong">${escapeHtml(assignment.comment)}</div>` : ''}
+            <div class="overview-source-day">
+              <div class="overview-source-day-title">
+                <span>${formatDate(dateStr)}</span>
+                <span>${totalPax} Pax</span>
+              </div>
+              <div class="overview-source-grouplist">
+                ${stays.sort((a,b) => a.groupName.localeCompare(b.groupName)).map(stay => {
+                  const assignment = getAssignment(stay, dateStr);
+                  return `
+                    <div class="overview-source-entry" onclick="window.__openStay('${stay.id}','${dateStr}')">
+                      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;">
+                        <strong>${escapeHtml(stay.groupName)}</strong>
+                        <span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span>
+                      </div>
+                      <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}</div>
+                      <div>${assignment ? escapeHtml(getAssignmentDisplayText(assignment)) : '<span class="muted">Kein Menü</span>'}</div>
+                      ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(formatTimeSwiss(assignment.time))}</div>` : ''}
+                      ${assignment?.comment ? `<div class="small assignment-comment-strong">${escapeHtml(assignment.comment)}</div>` : ''}
+                    </div>
+                  `;
+                }).join('')}
               </div>
             </div>
           `;
         }).join('');
+
         return `
-          <div class="group-card ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'}">
-            <div class="card-top">
+          <div class="group-card ${getSourceClass(bucket.source)}">
+            <div class="overview-source-head">
               <div>
-                <h3>${escapeHtml(stay.groupName)}</h3>
-                <p class="sub">${escapeHtml(stay.source)} • Halfboard</p>
+                <h3>${escapeHtml(bucket.source)}</h3>
+                <p class="sub">${MONTHS[state.currentMonth]} ${state.currentYear}</p>
               </div>
-              <span class="badge">${stay.active ? 'Aktiv' : 'Stale'}</span>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+                <span class="badge">${bucket.stays.length} Gruppen</span>
+                <button class="btn ghost screen-only" type="button" onclick="window.__printGroupsSource('${bucket.source.replace(/'/g, "\'")}')">Quelle drucken</button>
+              </div>
             </div>
-            <div class="small">${formatDate(stay.startDate)} – ${formatDate(stay.endDate)} • ${stay.dates.length} Nacht/Nächte</div>
-            <div class="small">Menütage: ${assignmentCount}</div>
+            <div class="small">Pax im Monat: ${monthPax} • Menütage: ${menuDays}</div>
             <div class="assignments">${rows}</div>
-            <div class="toolbar-row">
-              <button class="btn ghost" onclick="window.__printSingleGroup('${stay.id}')">A4 Druck</button>
-              <button class="btn ghost" onclick="window.__quickFillStay('${stay.id}')">Ganzem Aufenthalt Menü geben</button>
-            </div>
           </div>
         `;
-      }).join('') || `<div class="sub">Keine Gruppen für den aktuellen Filter gefunden.</div>`;
+      }).join('');
+      els.overviewGrid.innerHTML = html || `<div class="sub">Keine Gruppen für den aktuellen Filter gefunden.</div>`;
     }
 
 
@@ -2263,6 +2964,15 @@
         ]
       };
       return cards[state.menuLanguage] || cards.de;
+    }
+
+
+    function renderMenuTemplateOptions() {
+      if (!els.modalMenuTemplate) return;
+      const options = ['<option value="">Menü wählen</option>'].concat(
+        (state.menuLibrary || []).map(menu => `<option value="${menu.id}">${escapeHtml(typeof getMenuDisplayName === 'function' ? getMenuDisplayName(menu) : (menu.name || menu.templateName || 'Menü'))}</option>`)
+      );
+      els.modalMenuTemplate.innerHTML = options.join('');
     }
 
     function renderMenuLibrary() {
@@ -2317,16 +3027,29 @@
 
     function fillModalMenuFields(assignment) {
       const rawMenu = assignment?.menu || {};
-      const localizedMenu = (typeof getLocalizedMenu === 'function' ? getLocalizedMenu(rawMenu) : null) || rawMenu;
+      const hasManualValues = !!(
+        rawMenu.starter ||
+        rawMenu.main ||
+        rawMenu.dessert ||
+        rawMenu.special ||
+        rawMenu.comment
+      );
 
-      if (els.modalStarter) els.modalStarter.value = localizedMenu.starter || '';
-      if (els.modalMain) els.modalMain.value = localizedMenu.main || '';
-      if (els.modalDessert) els.modalDessert.value = localizedMenu.dessert || '';
-      if (els.modalSpecial) els.modalSpecial.value = localizedMenu.special || '';
+      const menuForDisplay = (!hasManualValues && typeof getLocalizedMenu === 'function')
+        ? (getLocalizedMenu(rawMenu) || rawMenu)
+        : rawMenu;
+
+      if (els.modalStarter) els.modalStarter.value = menuForDisplay.starter || '';
+      if (els.modalMain) els.modalMain.value = menuForDisplay.main || '';
+      if (els.modalDessert) els.modalDessert.value = menuForDisplay.dessert || '';
+      if (els.modalSpecial) els.modalSpecial.value = menuForDisplay.special || '';
       if (els.modalComment) els.modalComment.value = rawMenu.comment || '';
       if (els.modalDayComment) els.modalDayComment.value = assignment?.comment || '';
       if (els.modalTime) els.modalTime.value = assignment?.time || '';
-      if (els.modalMenuTemplate) els.modalMenuTemplate.value = rawMenu.templateId || '';
+      if (els.modalMenuTemplate) {
+        renderMenuTemplateOptions();
+        els.modalMenuTemplate.value = rawMenu.templateId || '';
+      }
     }
 
     function openStayModal(stayId, dateStr) {
@@ -2335,13 +3058,17 @@
       state.selected = { stayId, dateStr };
       const assignment = getAssignment(stay, dateStr) || { menu: { starter:'', main:'', dessert:'', special:'', comment:'' }, comment: '' };
       els.modalTitle.textContent = stay.groupName;
-      els.modalSub.textContent = `${stay.source} • Halfboard • ${formatDate(dateStr)}`;
+      els.modalSub.textContent = `${stay.source} • ${getMealLabel(stay, dateStr)} • ${formatDate(dateStr)}`;
       els.modalStayInfo.innerHTML = `
-        <div class="small">Aufenthalt: ${formatDate(stay.startDate)} – ${formatDate(stay.endDate)}</div>
         <div class="small">Ausgewählter Tag: ${formatDate(dateStr)}</div>
         <div class="small">Personen an diesem Tag: ${stay.personsByDate?.[dateStr] || 0}</div>
-        <div class="small">Status: ${stay.active ? 'Aktiv' : 'Im neuen Import nicht mehr vorhanden'}</div><div class="small">Uhrzeit: ${assignment?.time ? escapeHtml(assignment.time) : '—'}</div>
+        <div class="small">Status: ${stay.active ? 'Aktiv' : 'Im neuen Import nicht mehr vorhanden'}</div><div class="small">Uhrzeit: ${assignment?.time ? escapeHtml(formatTimeSwiss(assignment.time)) : '—'}</div>
       `;
+      if (els.modalStayName) els.modalStayName.value = stay.groupName || '';
+      if (els.modalSelectedDayDisplay) els.modalSelectedDayDisplay.textContent = formatDate(dateStr);
+      if (els.modalStayPax) els.modalStayPax.value = String(stay.personsByDate?.[dateStr] || 0);
+      if (els.modalMealType) els.modalMealType.value = assignment?.mealType || 'Dinner';
+      if (els.modalTargetDate) els.modalTargetDate.value = dateStr || '';
       fillModalMenuFields(assignment);
       renderModalAssignments(stay);
       els.groupModal.classList.add('open');
@@ -2357,7 +3084,7 @@
             <div>${formatDate(date)}</div>
             <div>
               <div>${assignment ? escapeHtml(buildMenuText(assignment.menu) || assignment.menu?.templateName || 'Menü erfasst') : '<span class="muted">Kein Menü</span>'}</div>
-              ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(assignment.time)}</div>` : ''}
+              ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(formatTimeSwiss(assignment.time))}</div>` : ''}
               ${assignment?.comment ? `<div class="small assignment-comment-strong">${escapeHtml(assignment.comment)}</div>` : ''}
             </div>
           </div>
@@ -2372,6 +3099,7 @@
     function closeModals() {
       els.groupModal.classList.remove('open');
       els.menuManagerModal.classList.remove('open');
+      if (els.reportModal) els.reportModal.classList.remove('open');
     }
 
     function ensureAssignment(stay, dateStr) {
@@ -2385,24 +3113,31 @@
       if (!sel) return;
       const stay = getStayById(sel.stayId);
       if (!stay) return;
-      const ass = ensureAssignment(stay, sel.dateStr);
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
+      const ass = ensureAssignment(stay, effectiveDate);
 
       const manualMenu = {
         starter: els.modalStarter?.value?.trim() || '',
         main: els.modalMain?.value?.trim() || '',
         dessert: els.modalDessert?.value?.trim() || '',
         special: els.modalSpecial?.value?.trim() || '',
-        comment: els.modalComment?.value?.trim() || ''
+        comment: els.modalComment?.value?.trim() || '',
+        templateId: ass.menu?.templateId || '',
+        templateName: ass.menu?.templateName || '',
+        manualOverride: true
       };
 
-      const hasManualMenu = Object.values(manualMenu).some(Boolean);
-      if (hasManualMenu) {
-        manualMenu.templateId = ass.menu?.templateId || '';
-        manualMenu.templateName = ass.menu?.templateName || '';
-        ass.menu = manualMenu;
-      } else if (ass.menu && !ass.menu.templateId) {
-        delete ass.menu;
-      }
+      const hasManualMenu = !!(
+        manualMenu.starter ||
+        manualMenu.main ||
+        manualMenu.dessert ||
+        manualMenu.special ||
+        manualMenu.comment ||
+        manualMenu.templateId
+      );
+
+      if (hasManualMenu) ass.menu = manualMenu;
+      else delete ass.menu;
 
       if (els.modalTime) {
         if (els.modalTime.value) ass.time = els.modalTime.value;
@@ -2411,7 +3146,7 @@
 
       saveState();
       render();
-      if (reopen) openStayModal(stay.id, sel.dateStr);
+      if (reopen) openStayModal(stay.id, effectiveDate);
     }
 
 
@@ -2420,34 +3155,38 @@
       const sel = state.selected;
       if (!sel) return;
       const stay = getStayById(sel.stayId);
-      if (!stay || !stay.assignments?.[sel.dateStr]) return;
+      if (!stay) return;
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
+      if (!stay.assignments?.[effectiveDate]) return;
 
-      delete stay.assignments[sel.dateStr].time;
-      const item = stay.assignments[sel.dateStr];
+      delete stay.assignments[effectiveDate].time;
+      const item = stay.assignments[effectiveDate];
       if (!item.comment && !item.menu) {
-        delete stay.assignments[sel.dateStr];
+        delete stay.assignments[effectiveDate];
       }
 
       saveState();
       render();
-      openStayModal(stay.id, sel.dateStr);
+      openStayModal(stay.id, effectiveDate);
     }
 
     function removeMenuForSelected() {
       const sel = state.selected;
       if (!sel) return;
       const stay = getStayById(sel.stayId);
-      if (!stay || !stay.assignments?.[sel.dateStr]) return;
+      if (!stay) return;
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
+      if (!stay.assignments?.[effectiveDate]) return;
 
-      delete stay.assignments[sel.dateStr].menu;
-      const item = stay.assignments[sel.dateStr];
+      delete stay.assignments[effectiveDate].menu;
+      const item = stay.assignments[effectiveDate];
       if (!item.comment && !item.time) {
-        delete stay.assignments[sel.dateStr];
+        delete stay.assignments[effectiveDate];
       }
 
       saveState();
       render();
-      openStayModal(stay.id, sel.dateStr);
+      openStayModal(stay.id, effectiveDate);
     }
 
     function saveCommentForSelected(reopen = true) {
@@ -2455,7 +3194,8 @@
       if (!sel) return;
       const stay = getStayById(sel.stayId);
       if (!stay) return;
-      const ass = ensureAssignment(stay, sel.dateStr);
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
+      const ass = ensureAssignment(stay, effectiveDate);
 
       if (els.modalTime) {
         if (els.modalTime.value) ass.time = els.modalTime.value;
@@ -2467,12 +3207,12 @@
       else delete ass.comment;
 
       if (!ass.menu && !ass.comment && !ass.time) {
-        delete stay.assignments[sel.dateStr];
+        delete stay.assignments[effectiveDate];
       }
 
       saveState();
       render();
-      if (reopen) openStayModal(stay.id, sel.dateStr);
+      if (reopen) openStayModal(stay.id, effectiveDate);
     }
 
 
@@ -2481,21 +3221,30 @@
       if (!sel) return;
       const stay = getStayById(sel.stayId);
       if (!stay) return;
-      const ass = ensureAssignment(stay, sel.dateStr);
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
+      const ass = ensureAssignment(stay, effectiveDate);
 
       const manualMenu = {
         starter: els.modalStarter?.value?.trim() || '',
         main: els.modalMain?.value?.trim() || '',
         dessert: els.modalDessert?.value?.trim() || '',
         special: els.modalSpecial?.value?.trim() || '',
-        comment: els.modalComment?.value?.trim() || ''
+        comment: els.modalComment?.value?.trim() || '',
+        templateId: ass.menu?.templateId || '',
+        templateName: ass.menu?.templateName || '',
+        manualOverride: true
       };
-      const hasManualMenu = Object.values(manualMenu).some(Boolean);
-      if (hasManualMenu) {
-        manualMenu.templateId = ass.menu?.templateId || '';
-        manualMenu.templateName = ass.menu?.templateName || '';
-        ass.menu = manualMenu;
-      }
+      const hasManualMenu = !!(
+        manualMenu.starter ||
+        manualMenu.main ||
+        manualMenu.dessert ||
+        manualMenu.special ||
+        manualMenu.comment ||
+        manualMenu.templateId
+      );
+
+      if (hasManualMenu) ass.menu = manualMenu;
+      else delete ass.menu;
 
       if (els.modalTime) {
         if (els.modalTime.value) ass.time = els.modalTime.value;
@@ -2507,9 +3256,10 @@
       else delete ass.comment;
 
       if (!ass.menu && !ass.comment && !ass.time) {
-        delete stay.assignments[sel.dateStr];
+        delete stay.assignments[effectiveDate];
       }
 
+      logChange('edit', `${stay.groupName}: ${formatDate(effectiveDate)} aktualisiert (Pax ${Number(stay.personsByDate?.[effectiveDate] || 0)}${ass.time ? `, ${formatTimeSwiss(ass.time)}` : ''}${dayComment ? ', Kommentar' : ''}${hasManualMenu ? ', Menü' : ''}).`);
       saveState();
       render();
 
@@ -2517,7 +3267,7 @@
         closeModals();
         state.selected = null;
       } else {
-        openStayModal(stay.id, sel.dateStr);
+        openStayModal(stay.id, effectiveDate);
       }
     }
 
@@ -2526,6 +3276,7 @@
       if (!sel) return;
       const stay = getStayById(sel.stayId);
       if (!stay) return;
+      const effectiveDate = applyStayMetaEdits(stay, sel.dateStr);
 
       const menuId = els.modalMenuTemplate?.value || '';
       const menu = createMenuFromTemplate(menuId);
@@ -2534,16 +3285,17 @@
         return;
       }
 
-      const targetDates = wholeStay ? stay.dates : [sel.dateStr];
+      const targetDates = wholeStay ? stay.dates : [effectiveDate];
       targetDates.forEach(date => {
         const ass = ensureAssignment(stay, date);
         ass.menu = structuredClone(menu);
-        if (date === sel.dateStr && els.modalTime?.value) ass.time = els.modalTime.value;
+        if (date === effectiveDate && els.modalTime?.value) ass.time = els.modalTime.value;
+        if (date === effectiveDate && els.modalMealType?.value) ass.mealType = els.modalMealType.value;
       });
 
       saveState();
       render();
-      openStayModal(stay.id, sel.dateStr);
+      openStayModal(stay.id, effectiveDate);
     }
 
     function applyQuickMenu() {
@@ -2645,6 +3397,19 @@
 
     function renderPrintMonthSheet() {
       const isA4 = state.printMode === 'month-a4';
+      const firstPreview = new Date(state.currentYear, state.currentMonth, 1);
+      const fw = (firstPreview.getDay() + 6) % 7;
+      const startPreview = new Date(firstPreview);
+      startPreview.setDate(firstPreview.getDate() - fw);
+      let maxGroupsPerDay = 0;
+      for (let i = 0; i < 42; i++) {
+        const d = new Date(startPreview);
+        d.setDate(startPreview.getDate() + i);
+        const iso = toIsoDate(d);
+        maxGroupsPerDay = Math.max(maxGroupsPerDay, getEventsForDate(iso).length);
+      }
+      const compactLevel = maxGroupsPerDay >= 8 ? '3' : maxGroupsPerDay >= 6 ? '2' : maxGroupsPerDay >= 4 ? '1' : '0';
+      if (els.printFitWrap) els.printFitWrap.dataset.compact = compactLevel;
       els.printSheetTitle.textContent = `Kalender – ${MONTHS[state.currentMonth]} ${state.currentYear}`;
       els.printWeekdayRow.innerHTML = WEEKDAYS.map((day, index) => `<div class="weekday ${index >= 5 ? 'weekend' : ''}">${day}</div>`).join('');
       const first = new Date(state.currentYear, state.currentMonth, 1);
@@ -2662,13 +3427,13 @@
         const isWeekend = d.getDay() === 0 || d.getDay() === 6;
         cells.push(`
           <div class="day-cell ${isCurrentMonth ? '' : 'other-month'} ${isWeekend ? 'weekend' : ''}">
-            <div class="day-top"><span>${isCurrentMonth ? d.getDate() : ''}</span>${totalPersons ? `<span class="person-total">${totalPersons} Total Pax</span>` : ''}</div>
+            <div class="day-top"><span>${isCurrentMonth ? d.getDate() : ''}</span>${getDailyTotalBadgeHtml(iso, totalPersons)}</div>
             ${events.map(stay => {
               const assignment = getAssignment(stay, iso);
               const menuText = getAssignmentDisplayText(assignment);
               const localizedMenu = getLocalizedMenu(assignment?.menu);
               const fullMenuText = [
-                assignment?.time,
+                assignment?.time ? `🕒 ${formatTimeSwiss(assignment.time)}` : '',
                 localizedMenu?.starter,
                 localizedMenu?.main,
                 localizedMenu?.dessert,
@@ -2696,17 +3461,20 @@
       if (!els.printFitWrap) return;
       els.printFitWrap.style.transformOrigin = 'top left';
       els.printFitWrap.style.transform = 'none';
-      const isA4 = document.body.classList.contains('print-month-a4');
       const sheet = document.querySelector('.print-sheet-only');
       if (!sheet) return;
       const availW = sheet.clientWidth || sheet.getBoundingClientRect().width;
       const availH = sheet.clientHeight || sheet.getBoundingClientRect().height;
-      const box = els.printFitWrap.getBoundingClientRect();
-      if (!box.width || !box.height) return;
-      const scaleW = availW / box.width;
-      const scaleH = availH / box.height;
-      const scale = Math.min(1, scaleW, scaleH, isA4 ? 0.92 : 1);
-      els.printFitWrap.style.transform = `scale(${scale})`;
+      let finalScale = 1;
+      for (let i = 0; i < 6; i++) {
+        const box = els.printFitWrap.getBoundingClientRect();
+        if (!box.width || !box.height) return;
+        const scaleW = availW / box.width;
+        const scaleH = availH / box.height;
+        finalScale = Math.max(0.52, Math.min(finalScale, scaleW, scaleH, 1));
+        els.printFitWrap.style.transform = `scale(${finalScale})`;
+        if (scaleW >= 0.995 && scaleH >= 0.995) break;
+      }
     }
 
     function cleanupPrintMode() {
@@ -2719,14 +3487,18 @@
       }
     }
 
-    function printCalendar(mode) {
+    function exportPdfCalendar(mode = 'month-a3') {
+      printCalendar(mode, true);
+    }
+
+    function printCalendar(mode, preferPdf = false) {
       state.printMode = mode;
       const previousTitle = document.title;
       cleanupPrintMode();
       const dynamicPrintStyle = document.createElement('style');
       dynamicPrintStyle.id = 'dynamicPrintStyle';
       if (mode === 'month-a3') {
-        dynamicPrintStyle.textContent = '@page { size: A3 landscape; margin: 3mm; }';
+        dynamicPrintStyle.textContent = '@page { size: A3 landscape; margin: 3mm 3mm 3mm 4mm; }';
         document.head.appendChild(dynamicPrintStyle);
         renderPrintMonthSheet();
         document.title = `Kalender_${MONTHS[state.currentMonth]}_${state.currentYear}`;
@@ -2734,7 +3506,7 @@
         setTimeout(() => {
           fitPrintMonthToPage();
           window.print();
-        }, 50);
+        }, preferPdf ? 120 : 50);
       } else if (mode === 'month-a4') {
         dynamicPrintStyle.textContent = '@page { size: A4 landscape; margin: 6mm; }';
         document.head.appendChild(dynamicPrintStyle);
@@ -2744,7 +3516,7 @@
         setTimeout(() => {
           fitPrintMonthToPage();
           window.print();
-        }, 50);
+        }, preferPdf ? 120 : 50);
       }
       setTimeout(() => {
         document.title = previousTitle;
@@ -2804,7 +3576,7 @@
           : 'Kein Menü';
         return `<tr>
           <td>${formatDate(date)}</td>
-          <td>${assignment?.time ? escapeHtml(assignment.time) : ''}</td>
+          <td>${assignment?.time ? '🕒 ' + escapeHtml(formatTimeSwiss(assignment.time)) : ''}</td>
           <td>${stay.personsByDate?.[date] || 0}</td>
           <td>${escapeHtml(menuText)}</td>
           <td>${assignment?.comment ? escapeHtml(assignment.comment) : ''}</td>
@@ -2827,7 +3599,7 @@
           </head>
           <body>
             <h1>${escapeHtml(stay.groupName)}</h1>
-            <div class="sub">${escapeHtml(stay.source)} • Halfboard • ${formatDate(stay.startDate)} – ${formatDate(stay.endDate)}</div>
+            <div class="sub">${escapeHtml(getMealLabel(stay, iso))} • ${formatDate(stay.startDate)} – ${formatDate(stay.endDate)}</div>
             <table>
               <thead><tr><th>Datum</th><th>Uhrzeit</th><th>Pax</th><th>Menü</th><th>Kommentar</th></tr></thead>
               <tbody>${rows}</tbody>
@@ -2842,22 +3614,105 @@
       w.print();
     }
 
-    function printGroups() {
-      const visible = getVisibleStays();
+    function printGroups(sourceName = '') {
+      const normalizedSource = String(sourceName || '').trim();
+      const visible = getVisibleStays()
+        .filter(stayHasCurrentMonthDate)
+        .filter(stay => !normalizedSource || String(stay.source || '').trim() === normalizedSource);
+
+      const uniqueDates = Array.from(new Set(
+        visible.flatMap(stay => (stay.dates || []).filter(isDateInCurrentMonth))
+      )).sort();
+
+      const pastelClasses = ['hb-color-1','hb-color-2','hb-color-3','hb-color-4','hb-color-5','hb-color-6','hb-color-7','hb-color-8'];
+      const dateColorMap = new Map(uniqueDates.map((dateStr, index) => [dateStr, pastelClasses[index % pastelClasses.length]]));
+
+      const rows = visible.flatMap(stay => {
+        return (stay.dates || []).filter(isDateInCurrentMonth).sort().map(dateStr => {
+          const assignment = getAssignment(stay, dateStr);
+          const menu = getLocalizedMenu(assignment?.menu) || assignment?.menu || {};
+          const menuChosen = getAssignmentDisplayText(assignment, true) ? '✅ Menü gewählt' : '—';
+          const colorClass = dateColorMap.get(dateStr) || '';
+          return `
+            <tr class="${stay.active ? '' : 'stale'} ${colorClass}">
+              <td><strong>${escapeHtml(stay.groupName)}</strong><div class="small">${escapeHtml(stay.source || '')}</div></td>
+              <td>${escapeHtml(stay.source || '')}</td>
+              <td><span class="hb-date-pill">${formatDate(dateStr)}</span></td>
+              <td><strong>${Number(stay.personsByDate?.[dateStr] || 0)}</strong></td>
+              <td>${stay.active ? 'Aktiv' : 'Im Storno-Archiv'}</td>
+              <td class="menu-status">${menuChosen}</td>
+              <td class="menu-cell starter">🥣 ${escapeHtml(menu.starter || '—')}</td>
+              <td class="menu-cell main">🍽️ ${escapeHtml(menu.main || '—')}</td>
+              <td class="menu-cell dessert">🍰 ${escapeHtml(menu.dessert || '—')}</td>
+            </tr>
+          `;
+        });
+      }).join('');
+
+      const legend = uniqueDates.length ? `
+        <div class="date-legend">
+          ${uniqueDates.map(dateStr => `<span class="legend-pill ${dateColorMap.get(dateStr) || ''}">${formatDate(dateStr)}</span>`).join('')}
+        </div>
+      ` : '';
+
+      const heading = normalizedSource
+        ? `Gruppenliste – ${normalizedSource} – ${MONTHS[state.currentMonth]} ${state.currentYear}`
+        : `Gruppenliste – ${MONTHS[state.currentMonth]} ${state.currentYear}`;
+      const subline = normalizedSource
+        ? `Querformat im gleichen Stil wie „Gruppe drucken“, gefiltert auf die Gruppenquelle ${normalizedSource}. Gruppen mit gleichem Halfboard-Datum sind farblich zusammengefasst.`
+        : 'Querformat mit aktuellem Gruppennamen, Tagesdatum, aktueller Pax-Zahl und gewähltem Menü je Halfboard-Tag. Gleiche Halfboard-Daten sind in derselben Pastellfarbe markiert.';
+      const emptyText = normalizedSource
+        ? `Keine Gruppen der Quelle ${escapeHtml(normalizedSource)} im aktuellen Monat gefunden.`
+        : 'Keine Gruppen im aktuellen Monat gefunden.';
+
       const html = `
         <html><head><title>Gruppen</title><style>
-          body { font-family: Arial, sans-serif; padding: 20px; color: #3f342b; }
-          h1 { margin-top: 0; }
-          table { border-collapse: collapse; width: 100%; }
-          th, td { border: 1px solid #d8c7b6; padding: 8px; text-align: left; }
+          @page { size: A4 landscape; margin: 10mm; }
+          body { font-family: Arial, sans-serif; padding: 12px; color: #3f342b; }
+          h1 { margin: 0 0 6px 0; }
+          .sub { color: #756556; margin-bottom: 10px; }
+          .date-legend { display:flex; flex-wrap:wrap; gap:8px; margin: 0 0 12px 0; }
+          .legend-pill, .hb-date-pill { display:inline-flex; align-items:center; border-radius:999px; padding:4px 10px; font-weight:700; font-size:10px; border:1px solid rgba(120,96,74,.18); }
+          table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+          th, td { border: 1px solid #d8c7b6; padding: 8px; text-align: left; vertical-align: top; font-size: 11px; word-break: break-word; }
           th { background: #f3e7d8; }
-          .stale { color: #b05e54; }
+          .stale { color: #9b5047; background: #fff1ef !important; }
+          .small { color: #7b6a57; font-size: 10px; margin-top: 4px; }
+          .menu-status { font-weight: 700; color: #7c5a38; }
+          .menu-cell { font-size: 10.5px; line-height: 1.35; }
+          .starter { background: rgba(255,255,255,0.35); }
+          .main { background: rgba(255,255,255,0.24); }
+          .dessert { background: rgba(255,255,255,0.42); }
+          .hb-color-1 td, .hb-color-1 .legend-pill, .hb-color-1 .hb-date-pill { background: #f8e6ea; }
+          .hb-color-2 td, .hb-color-2 .legend-pill, .hb-color-2 .hb-date-pill { background: #e8f1fb; }
+          .hb-color-3 td, .hb-color-3 .legend-pill, .hb-color-3 .hb-date-pill { background: #eef6e8; }
+          .hb-color-4 td, .hb-color-4 .legend-pill, .hb-color-4 .hb-date-pill { background: #fff0db; }
+          .hb-color-5 td, .hb-color-5 .legend-pill, .hb-color-5 .hb-date-pill { background: #f1e9fb; }
+          .hb-color-6 td, .hb-color-6 .legend-pill, .hb-color-6 .hb-date-pill { background: #fdebef; }
+          .hb-color-7 td, .hb-color-7 .legend-pill, .hb-color-7 .hb-date-pill { background: #e9f7f4; }
+          .hb-color-8 td, .hb-color-8 .legend-pill, .hb-color-8 .hb-date-pill { background: #f7f1e4; }
+          @media print {
+            .hb-color-1 td, .hb-color-1 .legend-pill, .hb-color-1 .hb-date-pill,
+            .hb-color-2 td, .hb-color-2 .legend-pill, .hb-color-2 .hb-date-pill,
+            .hb-color-3 td, .hb-color-3 .legend-pill, .hb-color-3 .hb-date-pill,
+            .hb-color-4 td, .hb-color-4 .legend-pill, .hb-color-4 .hb-date-pill,
+            .hb-color-5 td, .hb-color-5 .legend-pill, .hb-color-5 .hb-date-pill,
+            .hb-color-6 td, .hb-color-6 .legend-pill, .hb-color-6 .hb-date-pill,
+            .hb-color-7 td, .hb-color-7 .legend-pill, .hb-color-7 .hb-date-pill,
+            .hb-color-8 td, .hb-color-8 .legend-pill, .hb-color-8 .hb-date-pill,
+            .stale {
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+          }
         </style></head><body>
-          <h1>Gruppenliste</h1>
+          <h1>${heading}</h1>
+          <div class="sub">${subline}</div>
+          ${legend}
           <table>
-            <thead><tr><th>Gruppe</th><th>Quelle</th><th>Von</th><th>Bis</th><th>Status</th><th>Halfboard</th><th>Menü gewählt</th></tr></thead>
+            <thead><tr><th style="width:17%;">Gruppe</th><th style="width:11%;">Quelle</th><th style="width:11%;">Halfboard am</th><th style="width:7%;">Pax</th><th style="width:10%;">Status</th><th style="width:11%;">Menü gewählt</th><th style="width:14%;">Vorspeise</th><th style="width:19%;">Hauptgang</th><th style="width:14%;">Dessert</th></tr></thead>
             <tbody>
-              ${visible.map(stay => `<tr class="${stay.active ? '' : 'stale'}"><td>${escapeHtml(stay.groupName)}</td><td>${escapeHtml(stay.source)}</td><td>${formatDate(stay.startDate)}</td><td>${formatDate(stay.endDate)}</td><td>${stay.active ? 'Aktiv' : 'Nicht im neuen Import'}</td><td>Ja</td><td>${getMenuSelectionStatus(stay)}</td></tr>`).join('')}
+              ${rows || `<tr><td colspan="9">${emptyText}</td></tr>`}
             </tbody>
           </table>
         </body></html>
@@ -2885,6 +3740,14 @@
       state.importWarnings = [];
       saveState();
       render();
+    }
+
+
+    function clearReportHistory() {
+      if (!confirm('Änderungsbericht wirklich leeren? Der Verlauf wird gelöscht, aktive Kalenderdaten bleiben erhalten.')) return;
+      state.changeLog = [];
+      saveState();
+      renderReport();
     }
 
     function downloadJsonExport() {
@@ -2916,6 +3779,119 @@
         console.error(error);
         alert('JSON Import konnte nicht gelesen werden.');
       }
+    }
+
+
+    function getAllowedTimeOptions() {
+      const options = [{ value: '', label: '— keine Uhrzeit —' }];
+      for (let hour = 11; hour <= 22; hour++) {
+        for (let minute = 0; minute < 60; minute += 5) {
+          if (hour === 11 && minute < 35) continue;
+          if (hour === 22 && minute > 0) continue;
+          const hh = String(hour).padStart(2, '0');
+          const mm = String(minute).padStart(2, '0');
+          options.push({ value: `${hh}:${mm}`, label: `${hh}:${mm}` });
+        }
+      }
+      return options;
+    }
+
+    function renderTimeOptions() {
+      if (!els.modalTime) return;
+      const current = els.modalTime.value || '';
+      const options = getAllowedTimeOptions();
+      els.modalTime.innerHTML = options.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('');
+      const allowedValues = new Set(options.map(opt => opt.value));
+      els.modalTime.value = allowedValues.has(current) ? current : '';
+    }
+
+    function printOverviewSummary() {
+      const visible = getVisibleStays().filter(stayHasCurrentMonthDate);
+      const grouped = new Map();
+      visible.forEach(stay => {
+        const sourceKey = stay.source || 'Ohne Quelle';
+        if (!grouped.has(sourceKey)) grouped.set(sourceKey, { source: sourceKey, stays: [], dates: new Map() });
+        const bucket = grouped.get(sourceKey);
+        bucket.stays.push(stay);
+        (stay.dates || []).filter(isDateInCurrentMonth).forEach(dateStr => {
+          if (!bucket.dates.has(dateStr)) bucket.dates.set(dateStr, []);
+          bucket.dates.get(dateStr).push(stay);
+        });
+      });
+
+      const sections = Array.from(grouped.values()).sort((a,b) => a.source.localeCompare(b.source)).map(bucket => {
+        const monthPax = bucket.stays.reduce((sum, stay) => sum + Object.entries(stay.personsByDate || {}).reduce((inner, [dateStr, pax]) => inner + (isDateInCurrentMonth(dateStr) ? Number(pax || 0) : 0), 0), 0);
+        const menuDays = bucket.stays.reduce((sum, stay) => sum + Object.keys(stay.assignments || {}).filter(isDateInCurrentMonth).length, 0);
+        const rows = Array.from(bucket.dates.entries()).sort((a,b) => a[0].localeCompare(b[0])).map(([dateStr, stays]) => {
+          const totalPax = stays.reduce((sum, stay) => sum + Number(stay.personsByDate?.[dateStr] || 0), 0);
+          const entries = stays.slice().sort((a,b) => String(a.groupName || '').localeCompare(String(b.groupName || ''))).map(stay => {
+            const assignment = getAssignment(stay, dateStr);
+            return `
+              <div class="entry">
+                <div class="entry-head"><strong>${escapeHtml(stay.groupName || 'Unbenannte Gruppe')}</strong><span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span></div>
+                <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}</div>
+                <div class="menu-line">${assignment ? escapeHtml(getAssignmentDisplayText(assignment)) : '<span class="muted">Kein Menü</span>'}</div>
+                ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(formatTimeSwiss(assignment.time))}</div>` : ''}
+                ${assignment?.comment ? `<div class="small strong">${escapeHtml(assignment.comment)}</div>` : ''}
+              </div>
+            `;
+          }).join('');
+          return `
+            <div class="day-block">
+              <div class="day-head"><span>${formatDate(dateStr)}</span><span>${totalPax} Pax</span></div>
+              ${entries}
+            </div>
+          `;
+        }).join('');
+        return `
+          <section class="bucket ${getSourceClass(bucket.source)}">
+            <div class="bucket-head">
+              <div><h2>${escapeHtml(bucket.source)}</h2><div class="sub2">${MONTHS[state.currentMonth]} ${state.currentYear}</div></div>
+              <div class="badge">${bucket.stays.length} Gruppen</div>
+            </div>
+            <div class="sub2">Pax im Monat: ${monthPax} • Menütage: ${menuDays}</div>
+            <div class="bucket-body">${rows || '<div class="sub2">Keine aktiven Gruppen in diesem Monat.</div>'}</div>
+          </section>
+        `;
+      }).join('');
+
+      const html = `
+        <html><head><title>Gruppenübersicht</title><style>
+          @page { size: A4 landscape; margin: 10mm; }
+          body { font-family: Arial, sans-serif; padding: 10px; color: #3f342b; }
+          h1 { margin: 0 0 6px 0; }
+          h2 { margin: 0; font-size: 18px; }
+          .sub, .sub2 { color: #756556; }
+          .sub { margin-bottom: 12px; }
+          .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+          .bucket { border: 1px solid #d8c7b6; border-radius: 14px; padding: 10px; break-inside: avoid; }
+          .bucket-head { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; margin-bottom: 6px; }
+          .bucket-body { display:grid; gap:8px; margin-top:10px; }
+          .day-block { border:1px solid #eadbcc; border-radius: 12px; padding:8px; background:#fffdfa; }
+          .day-head { display:flex; justify-content:space-between; gap:8px; font-weight:700; margin-bottom:6px; }
+          .entry { border-top:1px dashed #e7d7c8; padding-top:6px; margin-top:6px; }
+          .entry:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+          .entry-head { display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
+          .badge { display:inline-block; background:#f3e7d8; border:1px solid #d8c7b6; border-radius:999px; padding:4px 8px; font-size:11px; font-weight:700; }
+          .small { color:#6f6154; font-size:11px; margin-top:3px; }
+          .menu-line { margin-top:4px; font-size:12px; }
+          .strong { color:#a73d34; font-weight:700; }
+          .muted { color:#9b8b7b; }
+          .source-panavision { background:#f7e6ea; }
+          .source-mapa { background:#f8efcf; }
+          .source-europamundo { background:#e6eef8; }
+          .source-individuelle { background:#efe4d8; }
+        </style></head><body>
+          <h1>Gruppenübersicht – ${MONTHS[state.currentMonth]} ${state.currentYear}</h1>
+          <div class="sub">Aktive Gruppenübersicht im gleichen Druckstil wie die Anwendung.</div>
+          <div class="grid">${sections || '<div class="sub2">Keine aktiven Gruppen im aktuellen Monat gefunden.</div>'}</div>
+        </body></html>
+      `;
+      const w = window.open('', '_blank');
+      w.document.write(html);
+      w.document.close();
+      w.focus();
+      w.print();
     }
 
     async function runCloudFunctionSync() {
@@ -2966,6 +3942,8 @@
 
       els.utilityToggle.onclick = () => els.utilityPanel.classList.toggle('open');
       document.getElementById('btnClearCalendar').onclick = clearCalendarData;
+      const _btnClearReport = document.getElementById('btnClearReport');
+      if (_btnClearReport) _btnClearReport.onclick = clearReportHistory;
       document.getElementById('btnExportJson').onclick = downloadJsonExport;
       document.getElementById('btnCloudSync').onclick = runCloudFunctionSync;
       els.jsonImportFile.onchange = async e => { await importJsonFile(e.target.files?.[0]); e.target.value = ''; };
@@ -3029,6 +4007,12 @@
       document.getElementById('btnRemoveSelectedTime').onclick = (e) => { e.preventDefault(); e.stopPropagation(); removeTimeForSelected(); };
       document.getElementById('saveMenuBtn').onclick = saveMenuToLibrary;
       if (els.cancelMenuEditBtn) els.cancelMenuEditBtn.onclick = resetMenuEditor;
+      if (els.btnCopySelectedDay) els.btnCopySelectedDay.onclick = (e) => { e.preventDefault(); e.stopPropagation(); copyOrMoveSelectedDay('copy'); };
+      if (els.btnMoveSelectedDay) els.btnMoveSelectedDay.onclick = (e) => { e.preventDefault(); e.stopPropagation(); copyOrMoveSelectedDay('move'); };
+      if (els.btnSplitSelectedDay) els.btnSplitSelectedDay.onclick = (e) => { e.preventDefault(); e.stopPropagation(); splitSelectedDayIntoNewGroup(); };
+      if (els.btnCancelSelectedDay) els.btnCancelSelectedDay.onclick = (e) => { e.preventDefault(); e.stopPropagation(); cancelSelectedDay(); };
+      if (els.btnRemoveAllMenus) els.btnRemoveAllMenus.onclick = (e) => { e.preventDefault(); e.stopPropagation(); removeAllMenusForSelectedStay(); };
+      if (els.btnMoveSelectedDay) els.btnMoveSelectedDay.onclick = (e) => { e.preventDefault(); e.stopPropagation(); copyOrMoveSelectedDay('move'); };
       if (els.saveModalBtn) {
         els.saveModalBtn.onclick = (e) => {
           e.preventDefault();
@@ -3040,14 +4024,21 @@
       document.getElementById('btnAssignWholeStay').onclick = (e) => { e.preventDefault(); e.stopPropagation(); assignTemplateToSelected(true); };
       const quickBtn = document.getElementById('btnApplyQuickMenu'); if (quickBtn) quickBtn.onclick = applyQuickMenu;
       document.getElementById('btnPrintMonthA3').onclick = () => printCalendar('month-a3');
+      const _btnExportPdfA3 = document.getElementById('btnExportPdfA3');
+      if (_btnExportPdfA3) _btnExportPdfA3.onclick = () => exportPdfCalendar('month-a3');
+      const _btnOpenReport = document.getElementById('btnOpenReport');
+      const _closeReportBtn = document.getElementById('closeReportBtn');
+      if (_btnOpenReport) _btnOpenReport.onclick = () => els.reportModal.classList.add('open');
+      if (_closeReportBtn) _closeReportBtn.onclick = closeModals;
       if (els.menuLanguageToggle) {
         els.menuLanguageToggle.onclick = () => {
           state.menuLanguage = state.menuLanguage === 'de' ? 'en' : 'de';
           renderMenuLibrary();
+      renderMenuTemplateOptions();
           syncQuickSelectors();
         };
       }
-      document.getElementById('btnPrintGroups').onclick = printGroups;
+      document.getElementById('btnPrintGroups').onclick = () => state.currentView === 'overview' ? printOverviewSummary() : printGroups();
       const _cloudSyncNowBtn = document.getElementById('cloudSyncNowBtn');
       const _cloudConnectBtnTools = document.getElementById('cloudConnectBtnTools');
       const _cloudDisconnectBtnTools = document.getElementById('cloudDisconnectBtnTools');
@@ -3056,7 +4047,7 @@
       if (_cloudDisconnectBtnTools) _cloudDisconnectBtnTools.onclick = () => cloudDisconnect();
 
       window.addEventListener('click', e => {
-        if (e.target === els.groupModal || e.target === els.menuManagerModal) closeModals();
+        if (e.target === els.groupModal || e.target === els.menuManagerModal || e.target === els.reportModal) closeModals();
       });
       window.addEventListener('afterprint', cleanupPrintMode);
       window.addEventListener('resize', () => {
@@ -3070,6 +4061,7 @@
     window.__deleteMenu = deleteMenu;
     window.__openStay = (stayId, dateStr) => openStayModal(stayId, dateStr);
     window.__printSingleGroup = (stayId) => printSingleGroup(stayId);
+    window.__printGroupsSource = (sourceName) => printGroups(sourceName);
     window.__quickFillStay = (stayId) => {
       const stay = getStayById(stayId);
       if (!stay) return;
@@ -3080,6 +4072,7 @@
     loadState();
     loadCloudSettings();
     bindEvents();
+    renderTimeOptions();
     render();
   </script>
 </body>
