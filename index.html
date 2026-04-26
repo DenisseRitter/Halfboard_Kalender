@@ -551,6 +551,29 @@
       color: var(--danger-text);
     }
 
+    .group-chip.is-copy,
+    .overview-source-entry.is-copy,
+    .group-card.is-copy {
+      background: linear-gradient(180deg, #fff7e8, #ffe1c2) !important;
+      border: 3px solid #d97706 !important;
+      box-shadow: 0 0 0 3px rgba(217,119,6,0.18), 0 8px 18px rgba(180,83,9,0.16) !important;
+    }
+
+    .copy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      border-radius: 999px;
+      padding: 1px 5px;
+      background: #b45309;
+      color: #fff;
+      font-size: .56rem;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
     .group-row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -1016,6 +1039,13 @@
         print-color-adjust: exact;
       }
 
+      body.print-month-a3 #printCalendarGrid .group-chip.is-copy,
+      body.print-month-a4 #printCalendarGrid .group-chip.is-copy {
+        background: #ffe1c2 !important;
+        border: 2px solid #b45309 !important;
+        box-shadow: inset 0 0 0 1px rgba(180,83,9,0.25) !important;
+      }
+
       body.print-month-a3 #printCalendarGrid .group-row,
       body.print-month-a4 #printCalendarGrid .group-row {
         display:grid;
@@ -1122,14 +1152,8 @@
 
         <label class="btn" for="jsonImportFile">JSON Import</label>
         <input id="jsonImportFile" type="file" accept=".json,application/json" class="hidden" />
-        <button class="btn soft" id="btnCloudSync">Cloud Function</button>
       </div>
-      <div class="cloud-settings">
-        <input id="cloudFunctionUrl" class="input" placeholder="Cloud Function URL" />
-        <input id="cloudFunctionToken" class="input" placeholder="Optionaler Token / Header" />
-      </div>
-      <textarea id="cloudFunctionPayload" class="input" placeholder="Optionales Zusatz-Payload als JSON, z. B. {"hotel":"ibis"}"></textarea>
-      <p class="footer-note" style="margin-top:10px;">JSON Import/Export sichert alle lokalen Änderungen inklusive Menüs, Kommentare und importierten Aufenthalte. Für die Cloud Function ist ein Hook vorbereitet; ersetze einfach URL und optional Token.</p>
+      <p class="footer-note" style="margin-top:10px;">JSON Import/Export sichert alle lokalen Änderungen inklusive Menüs, Kommentare und importierten Aufenthalte. Cloud Sync nutzt eine JSON-Datei in einem OneDrive-/Dropbox-/Netzlaufwerk-Ordner.</p>
       <div class="import-error-banner" id="importErrorBanner"></div>
     </div>
   </div>
@@ -1501,37 +1525,37 @@
         id: crypto.randomUUID(),
         name: 'Fish Menu',
         starter: 'Pumpkin Soup',
-        main: 'Oven-baked St. Peter fish oder Garlic white wine Fish (Merluza Style) mit steamed rice und green beans',
+        main: 'Oven-baked St. Peter fish, served with lemon-infused olive oil and paprika, accompanied by herbed potatoes\nOr\nGarlic white wine Fish (Merluza Style) With Steamed Rice and Green Beans',
         dessert: 'Brownies',
-        special: 'Brot und Wasser inklusive',
-        comment: 'Empfohlenes PDF-Menü'
+        special: 'All menus come with bread and water, included in the price',
+        comment: 'Recommended menu selection from PDF'
       },
       {
         id: crypto.randomUUID(),
         name: 'Chicken Menu',
         starter: 'Potato Leek Soup',
-        main: 'Lemon Herb Roasted Chicken oder Oven Baked Chicken mit rice pilaf und Gemüse',
-        dessert: 'Panna Cotta mit Berry Compote',
-        special: 'Brot und Wasser inklusive',
-        comment: 'Empfohlenes PDF-Menü'
+        main: 'Lemon Herb Roasted Chicken served with fragrant Spanish-style rice\nOr\nOven Baked Chicken served with tender rice pilaf and fresh, colorful vegetables',
+        dessert: 'Panna Cotta served with a luscious berry compote',
+        special: 'All menus come with bread and water, included in the price',
+        comment: 'Recommended menu selection from PDF'
       },
       {
         id: crypto.randomUUID(),
         name: 'Beef Menu',
-        starter: 'Mixed Salad',
-        main: 'Beef Stroganoff oder Spaghetti Bolognese',
+        starter: 'Mixed Salad Served with your choice of French or Italian dressing',
+        main: 'Beef Stroganoff Tender strips of beef in a rich, creamy sauce, served over pasta\nOr\nSpaghetti Bolognese',
         dessert: 'Chocolate Mousse',
-        special: 'French oder Italian Dressing',
-        comment: 'Empfohlenes PDF-Menü'
+        special: 'All menus come with bread and water, included in the price',
+        comment: 'Recommended menu selection from PDF'
       },
       {
         id: crypto.randomUUID(),
         name: 'Vegetarian Menu',
         starter: 'Tabbouleh Salad',
-        main: 'Pasta Primavera oder Vegetable Curry mit steamed rice',
+        main: 'Pasta Primavera\nOr\nVegetable Curry Aromatic vegetables simmered in a rich, spiced curry, served with steamed rice',
         dessert: 'Fruit Salad',
-        special: 'Brot und Wasser inklusive',
-        comment: 'Empfohlenes PDF-Menü'
+        special: 'All menus come with bread and water, included in the price',
+        comment: 'Recommended menu selection from PDF'
       }
     ];
 
@@ -1646,9 +1670,6 @@
       utilityToggle: document.getElementById('utilityToggle'),
       utilityPanel: document.getElementById('utilityPanel'),
       jsonImportFile: document.getElementById('jsonImportFile'),
-      cloudFunctionUrl: document.getElementById('cloudFunctionUrl'),
-      cloudFunctionToken: document.getElementById('cloudFunctionToken'),
-      cloudFunctionPayload: document.getElementById('cloudFunctionPayload'),
       importErrorBanner: document.getElementById('importErrorBanner'),
       menuLanguageToggle: document.getElementById('menuLanguageToggle'),
       reportMini: document.getElementById('reportMini'),
@@ -2114,22 +2135,11 @@
     }
 
     function loadCloudSettings() {
-      const raw = localStorage.getItem(CLOUD_SETTINGS_KEY);
-      if (!raw) return;
-      try {
-        const parsed = JSON.parse(raw);
-        state.cloud = {
-          url: parsed.url || '',
-          token: parsed.token || '',
-          payload: parsed.payload || ''
-        };
-      } catch (error) {
-        console.warn('Cloud settings konnten nicht geladen werden', error);
-      }
+      state.cloud = {};
     }
 
     function saveCloudSettings() {
-      localStorage.setItem(CLOUD_SETTINGS_KEY, JSON.stringify(state.cloud));
+      localStorage.setItem(CLOUD_SETTINGS_KEY, JSON.stringify({}));
     }
 
     function getSourceClass(source) {
@@ -2164,20 +2174,20 @@
       const key = menuRef?.templateName || menuRef?.name || '';
       const map = {
         'Fish Menu': {
-          de: { starter: 'Kürbissuppe', main: 'St. Peter Fisch aus dem Ofen oder Fisch in Knoblauch-Weisswein (Merluza Style) mit Kartoffeln / Reis und Bohnen', dessert: 'Brownies', special: 'Brot und Wasser inklusive' },
-          en: { starter: 'Pumpkin Soup', main: 'Oven-baked St. Peter fish or Garlic white wine Fish (Merluza Style) with potatoes / rice and beans', dessert: 'Brownies', special: 'Bread and water included' }
+          de: { starter: 'Kürbissuppe', main: 'St.-Peter-Fisch aus dem Ofen, serviert mit zitronenverfeinertem Olivenöl und Paprika, dazu Kräuterkartoffeln\nOder\nFisch in Knoblauch-Weisswein (Merluza-Art) mit gedämpftem Reis und grünen Bohnen', dessert: 'Brownies', special: 'Alle Menüs beinhalten Brot und Wasser im Preis' },
+          en: { starter: 'Pumpkin Soup', main: 'Oven-baked St. Peter fish, served with lemon-infused olive oil and paprika, accompanied by herbed potatoes\nOr\nGarlic white wine Fish (Merluza Style) With Steamed Rice and Green Beans', dessert: 'Brownies', special: 'All menus come with bread and water, included in the price' }
         },
         'Chicken Menu': {
-          de: { starter: 'Kartoffel-Lauch-Suppe', main: 'Zitronen-Kräuter-Hähnchen oder Ofen-Hähnchen mit spanischem Reis / Reispilaw und Gemüse', dessert: 'Panna Cotta mit Beerenkompott', special: 'Brot und Wasser inklusive' },
-          en: { starter: 'Potato Leek Soup', main: 'Lemon Herb Roasted Chicken or Oven Baked Chicken with Spanish-style rice / rice pilaf and vegetables', dessert: 'Panna Cotta with berry compote', special: 'Bread and water included' }
+          de: { starter: 'Kartoffel-Lauch-Suppe', main: 'Zitronen-Kräuter-Hähnchen, serviert mit aromatischem Reis nach spanischer Art\nOder\nHähnchen aus dem Ofen, serviert mit zartem Reispilaw und frischem, buntem Gemüse', dessert: 'Panna Cotta, serviert mit einem feinen Beerenkompott', special: 'Alle Menüs beinhalten Brot und Wasser im Preis' },
+          en: { starter: 'Potato Leek Soup', main: 'Lemon Herb Roasted Chicken served with fragrant Spanish-style rice\nOr\nOven Baked Chicken served with tender rice pilaf and fresh, colorful vegetables', dessert: 'Panna Cotta served with a luscious berry compote', special: 'All menus come with bread and water, included in the price' }
         },
         'Beef Menu': {
-          de: { starter: 'Gemischter Salat mit French oder Italian Dressing', main: 'Beef Stroganoff oder Spaghetti Bolognese', dessert: 'Schokoladenmousse', special: 'Brot und Wasser inklusive' },
-          en: { starter: 'Mixed Salad with French or Italian dressing', main: 'Beef Stroganoff or Spaghetti Bolognese', dessert: 'Chocolate Mousse', special: 'Bread and water included' }
+          de: { starter: 'Gemischter Salat, serviert mit Dressing nach Wahl: French oder Italian', main: 'Beef Stroganoff: zarte Rindfleischstreifen in einer reichhaltigen, cremigen Sauce, serviert auf Pasta\nOder\nSpaghetti Bolognese', dessert: 'Schokoladenmousse', special: 'Alle Menüs beinhalten Brot und Wasser im Preis' },
+          en: { starter: 'Mixed Salad Served with your choice of French or Italian dressing', main: 'Beef Stroganoff Tender strips of beef in a rich, creamy sauce, served over pasta\nOr\nSpaghetti Bolognese', dessert: 'Chocolate Mousse', special: 'All menus come with bread and water, included in the price' }
         },
         'Vegetarian Menu': {
-          de: { starter: 'Tabbouleh Salat', main: 'Pasta Primavera oder Gemüsecurry mit Reis', dessert: 'Fruchtsalat', special: 'Brot und Wasser inklusive' },
-          en: { starter: 'Tabbouleh Salad', main: 'Pasta Primavera or Vegetable Curry with rice', dessert: 'Fruit Salad', special: 'Bread and water included' }
+          de: { starter: 'Tabbouleh-Salat', main: 'Pasta Primavera\nOder\nGemüsecurry: aromatisches Gemüse in einem reichhaltigen, würzigen Curry, serviert mit gedämpftem Reis', dessert: 'Fruchtsalat', special: 'Alle Menüs beinhalten Brot und Wasser im Preis' },
+          en: { starter: 'Tabbouleh Salad', main: 'Pasta Primavera\nOr\nVegetable Curry Aromatic vegetables simmered in a rich, spiced curry, served with steamed rice', dessert: 'Fruit Salad', special: 'All menus come with bread and water, included in the price' }
         }
       };
       return map[key]?.[state.menuLanguage] || null;
@@ -2231,7 +2241,8 @@
 
     function buildMenuText(menu) {
       if (!menu) return '';
-      return [menu.starter, menu.main, menu.dessert].filter(Boolean).join(' · ');
+      const localized = getLocalizedMenu(menu) || menu;
+      return [localized.starter, localized.main, localized.dessert].filter(Boolean).join(' · ');
     }
 
     function getMenuTemplateById(id) {
@@ -2417,6 +2428,35 @@
       const sourceAssignment = stay.assignments?.[fromDate] ? JSON.parse(JSON.stringify(stay.assignments[fromDate])) : null;
       const sourcePax = stay.personsByDate?.[fromDate] ?? 0;
 
+      if (mode === 'copy') {
+        const copyId = 'copy_' + Math.random().toString(36).slice(2, 10);
+        const copiedStay = {
+          id: copyId,
+          mergeKey: `${getStayBaseKey(stay)}__copy__${copyId}`,
+          parentBaseKey: getStayBaseKey(stay),
+          isCopy: true,
+          copiedFromStayId: stay.id,
+          copiedFromDate: fromDate,
+          groupName: `${stay.groupName} (Kopie)`,
+          source: stay.source,
+          halfboard: stay.halfboard,
+          active: true,
+          startDate: toDate,
+          endDate: toDate,
+          dates: [toDate],
+          personsByDate: { [toDate]: sourcePax },
+          assignments: sourceAssignment ? { [toDate]: sourceAssignment } : {},
+          importTimestamp: stay.importTimestamp || new Date().toISOString(),
+          copyTimestamp: new Date().toISOString()
+        };
+        state.stays.push(copiedStay);
+        logChange('copy', `${stay.groupName}: ${formatDate(fromDate)} wurde auf ${formatDate(toDate)} kopiert. Diese Kopie wird bei neuen PMS-Importen ignoriert und muss manuell storniert werden.`, { stayId: copiedStay.id, copiedFromStayId: stay.id, fromDate, toDate });
+        saveState();
+        render();
+        openStayModal(copiedStay.id, toDate);
+        return;
+      }
+
       if (!stay.dates.includes(toDate)) {
         stay.dates.push(toDate);
         stay.dates = Array.from(new Set(stay.dates)).sort();
@@ -2432,16 +2472,14 @@
         stay.assignments[toDate] = sourceAssignment;
       }
 
-      if (mode === 'move') {
-        delete stay.personsByDate[fromDate];
-        if (stay.assignments) delete stay.assignments[fromDate];
-        stay.dates = stay.dates.filter(d => d !== fromDate);
-        if (!stay.dates.length) stay.dates = [toDate];
-        stay.startDate = stay.dates[0];
-        stay.endDate = stay.dates[stay.dates.length - 1];
-      }
+      delete stay.personsByDate[fromDate];
+      if (stay.assignments) delete stay.assignments[fromDate];
+      stay.dates = stay.dates.filter(d => d !== fromDate);
+      if (!stay.dates.length) stay.dates = [toDate];
+      stay.startDate = stay.dates[0];
+      stay.endDate = stay.dates[stay.dates.length - 1];
 
-      logChange(mode === 'move' ? 'move' : 'copy', `${stay.groupName}: ${formatDate(fromDate)} wurde ${mode === 'move' ? 'nach' : 'auf'} ${formatDate(toDate)} ${mode === 'move' ? 'verschoben' : 'kopiert'}.`);
+      logChange('move', `${stay.groupName}: ${formatDate(fromDate)} wurde nach ${formatDate(toDate)} verschoben.`);
       saveState();
       render();
       openStayModal(stay.id, toDate);
@@ -2488,7 +2526,7 @@
     }
 
     function getDisplayedTotalForDate(dateStr) {
-      return getEventsForDate(dateStr).reduce((sum, stay) => sum + Number(stay.personsByDate?.[dateStr] || 0), 0);
+      return getEventsForDate(dateStr).filter(stay => !stay.isCopy).reduce((sum, stay) => sum + Number(stay.personsByDate?.[dateStr] || 0), 0);
     }
 
     function getDailyTotalBadgeHtml(dateStr, fallbackTotal = 0) {
@@ -2515,9 +2553,11 @@
 
     function importRows(rows, isInitial = false) {
       const previousStays = Array.isArray(state.stays) ? state.stays.map(stay => JSON.parse(JSON.stringify(stay))) : [];
-      const previousByKey = new Map(previousStays.map(stay => [stay.mergeKey, stay]));
+      const manualCopies = previousStays.filter(stay => stay.isCopy);
+      const importRelevantPreviousStays = previousStays.filter(stay => !stay.isCopy);
+      const previousByKey = new Map(importRelevantPreviousStays.map(stay => [stay.mergeKey, stay]));
       const previousByBase = new Map();
-      previousStays.forEach(stay => {
+      importRelevantPreviousStays.forEach(stay => {
         const base = getStayBaseKey(stay);
         if (!previousByBase.has(base)) previousByBase.set(base, []);
         previousByBase.get(base).push(stay);
@@ -2637,7 +2677,7 @@
         });
       });
 
-      previousStays.forEach(prev => {
+      importRelevantPreviousStays.forEach(prev => {
         if (seenPrevIds.has(prev.id)) return;
         const hadVisibleDates = (prev.dates || []).length > 0;
         if (!hadVisibleDates) return;
@@ -2645,14 +2685,14 @@
         logChange('cancel-import', `${prev.groupName}: nicht mehr im neuen PMS-Import für ${compactDateList(prev.dates || [])}.`, { stayId: prev.id, dates: prev.dates || [] });
       });
 
-      state.stays = next.sort((a,b) => a.startDate.localeCompare(b.startDate) || a.groupName.localeCompare(b.groupName));
+      state.stays = [...next, ...manualCopies].sort((a,b) => a.startDate.localeCompare(b.startDate) || a.groupName.localeCompare(b.groupName));
       state.latestImportDailyTotals = importedDailyTotals;
       state.latestImportAt = new Date().toISOString();
 
       const prevActiveMap = new Map();
-      previousStays.filter(s => s.active !== false).forEach(stay => (stay.dates || []).forEach(date => prevActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
+      importRelevantPreviousStays.filter(s => s.active !== false).forEach(stay => (stay.dates || []).forEach(date => prevActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
       const newActiveMap = new Map();
-      state.stays.filter(s => s.active !== false).forEach(stay => (stay.dates || []).forEach(date => newActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
+      state.stays.filter(s => s.active !== false && !s.isCopy).forEach(stay => (stay.dates || []).forEach(date => newActiveMap.set(`${getStayBaseKey(stay)}__${date}`, Number(stay.personsByDate?.[date] || 0))));
       let newCount = 0, paxChanged = 0, cancelledCount = 0;
       newActiveMap.forEach((persons, key) => { if (!prevActiveMap.has(key)) newCount += 1; else if (prevActiveMap.get(key) != persons) paxChanged += 1; });
       prevActiveMap.forEach((_, key) => { if (!newActiveMap.has(key)) cancelledCount += 1; });
@@ -2711,9 +2751,6 @@
     function render() {
       els.importMetaNote.textContent = state.lastImportMeta?.note || '';
       setImportBanner(state.importWarnings?.length ? state.importWarnings.slice(0, 3).join(' | ') : '');
-      els.cloudFunctionUrl.value = state.cloud.url || '';
-      els.cloudFunctionToken.value = state.cloud.token || '';
-      els.cloudFunctionPayload.value = state.cloud.payload || '';
       if (els.topbar) els.topbar.classList.toggle('kpi-collapsed', state.kpiCollapsed);
       if (els.btnToggleKpi) els.btnToggleKpi.textContent = state.kpiCollapsed ? 'KPI-Leiste einblenden' : 'KPI-Leiste ausblenden';
       renderStats();
@@ -2838,15 +2875,16 @@
             ${events.map(stay => {
               const assignment = getAssignment(stay, iso);
               return `
-                <div class="group-chip ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'}" data-stay-id="${stay.id}" data-date="${iso}">
+                <div class="group-chip ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'} ${stay.isCopy ? 'is-copy' : ''}" data-stay-id="${stay.id}" data-date="${iso}">
                   <div class="group-row">
                     <div class="group-name" title="${escapeHtml(stay.groupName)}">${escapeHtml(stay.groupName)}</div>
                     <div style="display:flex;gap:6px;align-items:center;">
+                      ${stay.isCopy ? '<span class="copy-badge">KOPIE</span>' : ''}
                       <span class="badge">${stay.personsByDate?.[iso] || 0} Pax</span>
                       <button type="button" class="mini-delete-btn day-delete-btn" data-cancel-stay="${stay.id}" data-cancel-date="${iso}" title="Tag stornieren">×</button>
                     </div>
                   </div>
-                  <div class="group-meta">${escapeHtml(getMealLabel(stay, iso))}</div>
+                  <div class="group-meta">${escapeHtml(getMealLabel(stay, iso))}${stay.isCopy ? ' • manuelle Kopie – kein PMS-Import' : ''}</div>
                   ${assignment ? `<div class="menu-mini">${assignment?.time ? '🕒 ' + escapeHtml(formatTimeSwiss(assignment.time)) + ' • ' : ''}${escapeHtml(getAssignmentDisplayText(assignment))}</div>` : ''}
                 </div>
               `;
@@ -2896,12 +2934,12 @@
                 ${stays.sort((a,b) => a.groupName.localeCompare(b.groupName)).map(stay => {
                   const assignment = getAssignment(stay, dateStr);
                   return `
-                    <div class="overview-source-entry" onclick="window.__openStay('${stay.id}','${dateStr}')">
+                    <div class="overview-source-entry ${stay.isCopy ? 'is-copy' : ''}" onclick="window.__openStay('${stay.id}','${dateStr}')">
                       <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;">
                         <strong>${escapeHtml(stay.groupName)}</strong>
-                        <span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span>
+                        <span style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">${stay.isCopy ? '<span class="copy-badge">KOPIE</span>' : ''}<span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span></span>
                       </div>
-                      <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}</div>
+                      <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}${stay.isCopy ? ' • manuelle Kopie – kein PMS-Import' : ''}</div>
                       <div>${assignment ? escapeHtml(getAssignmentDisplayText(assignment)) : '<span class="muted">Kein Menü</span>'}</div>
                       ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(formatTimeSwiss(assignment.time))}</div>` : ''}
                       ${assignment?.comment ? `<div class="small assignment-comment-strong">${escapeHtml(assignment.comment)}</div>` : ''}
@@ -2940,9 +2978,9 @@
 
     function getMenuDisplayName(menu) {
       const map = {
-        'Fish Menu': { de: 'Fisch Menü', en: 'Fish Menu' },
-        'Chicken Menu': { de: 'Chicken Menü', en: 'Chicken Menu' },
-        'Beef Menu': { de: 'Rind Menü', en: 'Beef Menu' },
+        'Fish Menu': { de: 'Fischmenü', en: 'Fish Menu' },
+        'Chicken Menu': { de: 'Hähnchenmenü', en: 'Chicken Menu' },
+        'Beef Menu': { de: 'Rindfleischmenü', en: 'Beef Menu' },
         'Vegetarian Menu': { de: 'Vegetarisches Menü', en: 'Vegetarian Menu' }
       };
       return map[menu?.name]?.[state.menuLanguage] || menu?.name || '';
@@ -2951,21 +2989,24 @@
     function getMenuSuggestionCards() {
       const cards = {
         de: [
-          { key: 'fish', title: 'FISCH MENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs kommen mit Brot und Wasser, im Preis inbegriffen.', starter: 'Kürbissuppe', main: 'St. Peter Fisch aus dem Ofen oder Fisch in Knoblauch-Weisswein (Merluza Style) mit Kartoffeln / Reis und Bohnen', dessert: 'Brownies' },
-          { key: 'chicken', title: 'CHICKEN MENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs kommen mit Brot und Wasser, im Preis inbegriffen.', starter: 'Kartoffel-Lauch-Suppe', main: 'Zitronen-Kräuter-Hähnchen oder Ofen-Hähnchen mit spanischem Reis / Reispilaw und Gemüse', dessert: 'Panna Cotta mit Beerenkompott' },
-          { key: 'beef', title: 'RIND MENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs kommen mit Brot und Wasser, im Preis inbegriffen.', starter: 'Gemischter Salat mit French oder Italian Dressing', main: 'Beef Stroganoff oder Spaghetti Bolognese', dessert: 'Schokoladenmousse' },
-          { key: 'vegetarian', title: 'VEGETARISCHES MENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs kommen mit Brot und Wasser, im Preis inbegriffen.', starter: 'Tabbouleh Salat', main: 'Pasta Primavera oder Gemüsecurry mit Reis', dessert: 'Fruchtsalat' }
+          { key: 'fish', title: 'FISCHMENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs beinhalten Brot und Wasser im Preis.', starter: 'Kürbissuppe', main: 'St.-Peter-Fisch aus dem Ofen, serviert mit zitronenverfeinertem Olivenöl und Paprika, dazu Kräuterkartoffeln\nOder\nFisch in Knoblauch-Weisswein (Merluza-Art) mit gedämpftem Reis und grünen Bohnen', dessert: 'Brownies' },
+          { key: 'chicken', title: 'HÄHNCHENMENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs beinhalten Brot und Wasser im Preis.', starter: 'Kartoffel-Lauch-Suppe', main: 'Zitronen-Kräuter-Hähnchen, serviert mit aromatischem Reis nach spanischer Art\nOder\nHähnchen aus dem Ofen, serviert mit zartem Reispilaw und frischem, buntem Gemüse', dessert: 'Panna Cotta, serviert mit einem feinen Beerenkompott' },
+          { key: 'beef', title: 'RINDFLEISCHMENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs beinhalten Brot und Wasser im Preis.', starter: 'Gemischter Salat, serviert mit Dressing nach Wahl: French oder Italian', main: 'Beef Stroganoff: zarte Rindfleischstreifen in einer reichhaltigen, cremigen Sauce, serviert auf Pasta\nOder\nSpaghetti Bolognese', dessert: 'Schokoladenmousse' },
+          { key: 'vegetarian', title: 'VEGETARISCHES MENÜ', starterLabel: 'Vorspeise', mainLabel: 'Hauptgang', dessertLabel: 'Dessert', footer: 'Alle Menüs beinhalten Brot und Wasser im Preis.', starter: 'Tabbouleh-Salat', main: 'Pasta Primavera\nOder\nGemüsecurry: aromatisches Gemüse in einem reichhaltigen, würzigen Curry, serviert mit gedämpftem Reis', dessert: 'Fruchtsalat' }
         ],
         en: [
-          { key: 'fish', title: 'FISH MENU', starterLabel: 'Starter', mainLabel: 'Main', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Pumpkin Soup', main: 'Oven-baked St. Peter fish or Garlic white wine Fish (Merluza Style) with potatoes / rice and beans', dessert: 'Brownies' },
-          { key: 'chicken', title: 'CHICKEN MENU', starterLabel: 'Starter', mainLabel: 'Main', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Potato Leek Soup', main: 'Lemon Herb Roasted Chicken or Oven Baked Chicken with Spanish-style rice / rice pilaf and vegetables', dessert: 'Panna Cotta with berry compote' },
-          { key: 'beef', title: 'BEEF MENU', starterLabel: 'Starter', mainLabel: 'Main', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Mixed Salad with French or Italian dressing', main: 'Beef Stroganoff or Spaghetti Bolognese', dessert: 'Chocolate Mousse' },
-          { key: 'vegetarian', title: 'VEGETARIAN MENU', starterLabel: 'Starter', mainLabel: 'Main', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Tabbouleh Salad', main: 'Pasta Primavera or Vegetable Curry with rice', dessert: 'Fruit Salad' }
+          { key: 'fish', title: 'FISH MENU', starterLabel: 'Starter', mainLabel: 'Main Course', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Pumpkin Soup', main: 'Oven-baked St. Peter fish, served with lemon-infused olive oil and paprika, accompanied by herbed potatoes\nOr\nGarlic white wine Fish (Merluza Style) With Steamed Rice and Green Beans', dessert: 'Brownies' },
+          { key: 'chicken', title: 'CHICKEN MENU', starterLabel: 'Starter', mainLabel: 'Main Course', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Potato Leek Soup', main: 'Lemon Herb Roasted Chicken served with fragrant Spanish-style rice\nOr\nOven Baked Chicken served with tender rice pilaf and fresh, colorful vegetables', dessert: 'Panna Cotta served with a luscious berry compote' },
+          { key: 'beef', title: 'BEEF MENU', starterLabel: 'Starter', mainLabel: 'Main Course', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Mixed Salad Served with your choice of French or Italian dressing', main: 'Beef Stroganoff Tender strips of beef in a rich, creamy sauce, served over pasta\nOr\nSpaghetti Bolognese', dessert: 'Chocolate Mousse' },
+          { key: 'vegetarian', title: 'VEGETARIAN MENU', starterLabel: 'Starter', mainLabel: 'Main Course', dessertLabel: 'Dessert', footer: 'All menus come with bread and water, included in the price.', starter: 'Tabbouleh Salad', main: 'Pasta Primavera\nOr\nVegetable Curry Aromatic vegetables simmered in a rich, spiced curry, served with steamed rice', dessert: 'Fruit Salad' }
         ]
       };
       return cards[state.menuLanguage] || cards.de;
     }
 
+    function formatMenuLine(value) {
+      return escapeHtml(value || '').replace(/\\n/g, '<br>');
+    }
 
     function renderMenuTemplateOptions() {
       if (!els.modalMenuTemplate) return;
@@ -2988,9 +3029,9 @@
         ${suggestionCards.map(menu => `
           <div class="menu-suggestion-card">
             <h4>${icons[menu.key]} ${menu.title}</h4>
-            <div class="small"><strong>${menu.starterLabel}:</strong> ${escapeHtml(menu.starter)}</div>
-            <div class="small" style="margin-top:8px;"><strong>${menu.mainLabel}:</strong> ${escapeHtml(menu.main)}</div>
-            <div class="small" style="margin-top:8px;"><strong>${menu.dessertLabel}:</strong> ${escapeHtml(menu.dessert)}</div>
+            <div class="small"><strong>${menu.starterLabel}:</strong> ${formatMenuLine(menu.starter)}</div>
+            <div class="small" style="margin-top:8px;"><strong>${menu.mainLabel}:</strong> ${formatMenuLine(menu.main)}</div>
+            <div class="small" style="margin-top:8px;"><strong>${menu.dessertLabel}:</strong> ${formatMenuLine(menu.dessert)}</div>
           </div>
         `).join('')}
         <div class="menu-suggestion-footer">${escapeHtml(suggestionCards[0]?.footer || '')}</div>
@@ -3062,7 +3103,7 @@
       els.modalStayInfo.innerHTML = `
         <div class="small">Ausgewählter Tag: ${formatDate(dateStr)}</div>
         <div class="small">Personen an diesem Tag: ${stay.personsByDate?.[dateStr] || 0}</div>
-        <div class="small">Status: ${stay.active ? 'Aktiv' : 'Im neuen Import nicht mehr vorhanden'}</div><div class="small">Uhrzeit: ${assignment?.time ? escapeHtml(formatTimeSwiss(assignment.time)) : '—'}</div>
+        <div class="small">Status: ${stay.isCopy ? 'Kopie – wird bei neuen PMS-Importen ignoriert' : (stay.active ? 'Aktiv' : 'Im neuen Import nicht mehr vorhanden')}</div><div class="small">Uhrzeit: ${assignment?.time ? escapeHtml(formatTimeSwiss(assignment.time)) : '—'}</div>
       `;
       if (els.modalStayName) els.modalStayName.value = stay.groupName || '';
       if (els.modalSelectedDayDisplay) els.modalSelectedDayDisplay.textContent = formatDate(dateStr);
@@ -3441,12 +3482,12 @@
                 assignment?.comment
               ].filter(Boolean).join(' • ');
               return `
-                <div class="group-chip ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'}">
+                <div class="group-chip ${getSourceClass(stay.source)} ${stay.active ? '' : 'stale'} ${stay.isCopy ? 'is-copy' : ''}">
                   <div class="group-row">
-                    <div class="group-name" title="${escapeHtml(stay.groupName)}">${escapeHtml(stay.groupName)}</div>
-                    <span class="badge">${stay.personsByDate?.[iso] || 0} Pax</span>
+                    <div class="group-name" title="${escapeHtml(stay.groupName)}">${stay.isCopy ? 'KOPIE · ' : ''}${escapeHtml(stay.groupName)}</div>
+                    <span style="display:flex;gap:1mm;align-items:center;flex-wrap:wrap;justify-content:flex-end;">${stay.isCopy ? '<span class="copy-badge">KOPIE</span>' : ''}<span class="badge">${stay.personsByDate?.[iso] || 0} Pax</span></span>
                   </div>
-                  ${!isA4 ? `<div class="group-meta">${escapeHtml(stay.source)}</div>` : ''}
+                  ${!isA4 ? `<div class="group-meta">${escapeHtml(stay.source)}${stay.isCopy ? ' • manuelle Kopie – kein PMS-Import' : ''}</div>` : ''}
                   ${assignment && !isA4 ? `<div class="menu-mini">${escapeHtml(fullMenuText || getAssignmentDisplayText(assignment, true) || menuText)}</div>` : ''}
                 </div>
               `;
@@ -3549,7 +3590,7 @@
           d.setDate(start.getDate() + i);
           const iso = toIsoDate(d);
           const events = getEventsForDate(iso);
-          html += `<div class="day-cell ${d.getMonth() !== month ? 'other-month' : ''}"><div class="day-top"><span>${d.getDate()}</span></div>${events.map(stay => `<div class="group-chip ${getSourceClass(stay.source)}"><div class="group-name" title="${escapeHtml(stay.groupName)}">${escapeHtml(stay.groupName)}</div><div class="group-meta">${stay.personsByDate?.[iso] || 0} Pax</div></div>`).join('')}</div>`;
+          html += `<div class="day-cell ${d.getMonth() !== month ? 'other-month' : ''}"><div class="day-top"><span>${d.getDate()}</span></div>${events.map(stay => `<div class="group-chip ${getSourceClass(stay.source)} ${stay.isCopy ? 'is-copy' : ''}"><div class="group-name" title="${escapeHtml(stay.groupName)}">${stay.isCopy ? 'KOPIE · ' : ''}${escapeHtml(stay.groupName)}</div><div class="group-meta">${stay.personsByDate?.[iso] || 0} Pax</div></div>`).join('')}</div>`;
         }
         html += `</div></div>`;
       }
@@ -3599,7 +3640,7 @@
           </head>
           <body>
             <h1>${escapeHtml(stay.groupName)}</h1>
-            <div class="sub">${escapeHtml(getMealLabel(stay, iso))} • ${formatDate(stay.startDate)} – ${formatDate(stay.endDate)}</div>
+            <div class="sub">${stay.isCopy ? 'KOPIE • ' : ''}${escapeHtml(stay.source || '')} • ${formatDate(stay.startDate)} – ${formatDate(stay.endDate)}</div>
             <table>
               <thead><tr><th>Datum</th><th>Uhrzeit</th><th>Pax</th><th>Menü</th><th>Kommentar</th></tr></thead>
               <tbody>${rows}</tbody>
@@ -3634,12 +3675,12 @@
           const menuChosen = getAssignmentDisplayText(assignment, true) ? '✅ Menü gewählt' : '—';
           const colorClass = dateColorMap.get(dateStr) || '';
           return `
-            <tr class="${stay.active ? '' : 'stale'} ${colorClass}">
-              <td><strong>${escapeHtml(stay.groupName)}</strong><div class="small">${escapeHtml(stay.source || '')}</div></td>
+            <tr class="${stay.active ? '' : 'stale'} ${stay.isCopy ? 'is-copy' : ''} ${colorClass}">
+              <td><strong>${stay.isCopy ? 'KOPIE · ' : ''}${escapeHtml(stay.groupName)}</strong><div class="small">${escapeHtml(stay.source || '')}${stay.isCopy ? ' • manuelle Kopie – kein PMS-Import' : ''}</div></td>
               <td>${escapeHtml(stay.source || '')}</td>
               <td><span class="hb-date-pill">${formatDate(dateStr)}</span></td>
               <td><strong>${Number(stay.personsByDate?.[dateStr] || 0)}</strong></td>
-              <td>${stay.active ? 'Aktiv' : 'Im Storno-Archiv'}</td>
+              <td>${stay.isCopy ? 'KOPIE – manuell stornieren' : (stay.active ? 'Aktiv' : 'Im Storno-Archiv')}</td>
               <td class="menu-status">${menuChosen}</td>
               <td class="menu-cell starter">🥣 ${escapeHtml(menu.starter || '—')}</td>
               <td class="menu-cell main">🍽️ ${escapeHtml(menu.main || '—')}</td>
@@ -3677,6 +3718,7 @@
           th, td { border: 1px solid #d8c7b6; padding: 8px; text-align: left; vertical-align: top; font-size: 11px; word-break: break-word; }
           th { background: #f3e7d8; }
           .stale { color: #9b5047; background: #fff1ef !important; }
+          .is-copy td { background: #ffe1c2 !important; border-top: 3px solid #b45309 !important; border-bottom: 3px solid #b45309 !important; }
           .small { color: #7b6a57; font-size: 10px; margin-top: 4px; }
           .menu-status { font-weight: 700; color: #7c5a38; }
           .menu-cell { font-size: 10.5px; line-height: 1.35; }
@@ -3700,7 +3742,7 @@
             .hb-color-6 td, .hb-color-6 .legend-pill, .hb-color-6 .hb-date-pill,
             .hb-color-7 td, .hb-color-7 .legend-pill, .hb-color-7 .hb-date-pill,
             .hb-color-8 td, .hb-color-8 .legend-pill, .hb-color-8 .hb-date-pill,
-            .stale {
+            .stale, .is-copy td {
               -webkit-print-color-adjust: exact;
               print-color-adjust: exact;
             }
@@ -3827,9 +3869,9 @@
           const entries = stays.slice().sort((a,b) => String(a.groupName || '').localeCompare(String(b.groupName || ''))).map(stay => {
             const assignment = getAssignment(stay, dateStr);
             return `
-              <div class="entry">
-                <div class="entry-head"><strong>${escapeHtml(stay.groupName || 'Unbenannte Gruppe')}</strong><span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span></div>
-                <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}</div>
+              <div class="entry ${stay.isCopy ? 'is-copy' : ''}">
+                <div class="entry-head"><strong>${stay.isCopy ? 'KOPIE · ' : ''}${escapeHtml(stay.groupName || 'Unbenannte Gruppe')}</strong><span class="badge">${Number(stay.personsByDate?.[dateStr] || 0)} Pax</span></div>
+                <div class="small">${escapeHtml(getMealLabel(stay, dateStr))}${stay.isCopy ? ' • manuelle Kopie – kein PMS-Import' : ''}</div>
                 <div class="menu-line">${assignment ? escapeHtml(getAssignmentDisplayText(assignment)) : '<span class="muted">Kein Menü</span>'}</div>
                 ${assignment?.time ? `<div class="small">🕒 ${escapeHtml(formatTimeSwiss(assignment.time))}</div>` : ''}
                 ${assignment?.comment ? `<div class="small strong">${escapeHtml(assignment.comment)}</div>` : ''}
@@ -3871,6 +3913,7 @@
           .day-head { display:flex; justify-content:space-between; gap:8px; font-weight:700; margin-bottom:6px; }
           .entry { border-top:1px dashed #e7d7c8; padding-top:6px; margin-top:6px; }
           .entry:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+          .entry.is-copy { background:#ffe1c2; border:3px solid #b45309; border-radius:10px; padding:6px; }
           .entry-head { display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
           .badge { display:inline-block; background:#f3e7d8; border:1px solid #d8c7b6; border-radius:999px; padding:4px 8px; font-size:11px; font-weight:700; }
           .small { color:#6f6154; font-size:11px; margin-top:3px; }
@@ -3894,44 +3937,6 @@
       w.print();
     }
 
-    async function runCloudFunctionSync() {
-      const url = els.cloudFunctionUrl.value.trim();
-      const token = els.cloudFunctionToken.value.trim();
-      const extraPayloadRaw = els.cloudFunctionPayload.value.trim();
-      state.cloud = { url, token, payload: extraPayloadRaw };
-      saveState();
-      if (!url) return alert('Bitte zuerst eine Cloud Function URL eintragen.');
-      let extraPayload = {};
-      if (extraPayloadRaw) {
-        try {
-          extraPayload = JSON.parse(extraPayloadRaw);
-        } catch (error) {
-          return alert('Zusatz-Payload ist kein valides JSON.');
-        }
-      }
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-          },
-          body: JSON.stringify({
-            action: 'syncCalendarState',
-            export: exportStateBundle(),
-            ...extraPayload
-          })
-        });
-        const resultText = await response.text();
-        if (!response.ok) throw new Error(resultText || `HTTP ${response.status}`);
-        alert('Cloud Function erfolgreich aufgerufen.');
-        console.log('Cloud Function Antwort:', resultText);
-      } catch (error) {
-        console.error(error);
-        alert(`Cloud Function Fehler: ${error.message}`);
-      }
-    }
-
     function bindEvents() {
       document.querySelectorAll('[data-view]').forEach(btn => btn.onclick = () => {
         state.currentView = btn.dataset.view;
@@ -3945,11 +3950,7 @@
       const _btnClearReport = document.getElementById('btnClearReport');
       if (_btnClearReport) _btnClearReport.onclick = clearReportHistory;
       document.getElementById('btnExportJson').onclick = downloadJsonExport;
-      document.getElementById('btnCloudSync').onclick = runCloudFunctionSync;
       els.jsonImportFile.onchange = async e => { await importJsonFile(e.target.files?.[0]); e.target.value = ''; };
-      els.cloudFunctionUrl.oninput = e => { state.cloud.url = e.target.value; saveCloudSettings(); };
-      els.cloudFunctionToken.oninput = e => { state.cloud.token = e.target.value; saveCloudSettings(); };
-      els.cloudFunctionPayload.oninput = e => { state.cloud.payload = e.target.value; saveCloudSettings(); };
 
       if (els.btnToggleKpi) {
         els.btnToggleKpi.onclick = () => {
